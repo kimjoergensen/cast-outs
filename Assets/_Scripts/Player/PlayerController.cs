@@ -54,7 +54,7 @@ namespace WarclockBrawl.Player {
         /// </summary>
         private void Update() {
             // Check for user inputs.
-            if(Input.anyKeyDown) {
+            if(Input.anyKey) {
                 CheckForInput();
             }
         }
@@ -86,7 +86,7 @@ namespace WarclockBrawl.Player {
         /// </summary>
         private void CheckForInput() {
             // Check if the MOVE key has been pressed.
-            if(Input.GetKeyDown(inputs.Move)) {
+            if(Input.GetKey(inputs.Move)) {
                 _moveInputPressed = true;
             }
 

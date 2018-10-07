@@ -34,9 +34,9 @@ namespace WarclockBrawl.Player {
         #endregion
 
         /// <summary>
-        /// Constructor for initializing inspector menu class variables
+        /// Gets called when PlayerController is initialized.
         /// </summary>
-        public PlayerController() {
+        private void Awake() {
             essentials = new PlayerControllerEssentials();
             settings = new PlayerControllerSettings();
             inputs = new InputManager.PlayerInputs();

@@ -26,7 +26,7 @@ namespace WarclockBrawl.Player {
         public InputManager.PlayerInputs inputs;
         #endregion
 
-        #region Private variables
+        #region Class variables
         // Input variables.
         private bool _moveInputPressed = false;
         private bool _fireInputPressed = false;
@@ -143,8 +143,8 @@ namespace WarclockBrawl.Player {
         /// Validate the code in the editor at compile time.
         /// </summary>
         private void Validate() {
-            Assert.AreEqual(essentials.agent.GetType(), typeof(NavMeshAgent), AssertUtility.WrongTypeOrNullErrorMessage("Essentials.Agent", essentials.agent, gameObject));
-            Assert.AreEqual(essentials.camera.GetType(), typeof(Camera), AssertUtility.WrongTypeOrNullErrorMessage("Essentials.Camera", essentials.camera, gameObject));
+            Assert.AreEqual(essentials.agent.GetType(), typeof(NavMeshAgent), AssertUtility.PropertyWrongTypeOrNullErrorMessage("Essentials.Agent", essentials.agent, gameObject));
+            Assert.AreEqual(essentials.camera.GetType(), typeof(Camera), AssertUtility.PropertyWrongTypeOrNullErrorMessage("Essentials.Camera", essentials.camera, gameObject));
         }
     }
 }

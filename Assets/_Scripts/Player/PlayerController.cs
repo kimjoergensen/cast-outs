@@ -2,13 +2,13 @@
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Assertions;
-using WarlockBrawl.Utility;
+using WarlockBrawl.Extensions;
 
 namespace WarclockBrawl.Player {
     [Serializable]
     public class PlayerControllerEssentials {
-        public Camera camera;
-        public NavMeshAgent agent;
+        public Camera Camera;
+        public NavMeshAgent Agent;
     }
 
     [Serializable]
@@ -36,7 +36,7 @@ namespace WarclockBrawl.Player {
         /// <summary>
         /// Gets called when PlayerController is initialized.
         /// </summary>
-        private void Awake() {
+        public PlayerController() {
             essentials = new PlayerControllerEssentials();
             settings = new PlayerControllerSettings();
             inputs = new InputManager.PlayerInputs();
@@ -46,6 +46,7 @@ namespace WarclockBrawl.Player {
         /// Editor validation
         /// </summary>
         private void OnValidate() {
+            Debug.Log($"Validating {this} script.");
             Validate();
         }
 
@@ -106,7 +107,7 @@ namespace WarclockBrawl.Player {
         /// </summary>
         private void PlayerActionMove() {
             // Fire a ray from the camera towards the current mouse position;
-            Ray ray = essentials.camera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = essentials.Camera.ScreenPointToRay(Input.mousePosition);
             // Stores the world's X and Y coordinates where the raycast hit.
             RaycastHit hit;
             // Check if the raycast didn't hit any game objects.
@@ -122,7 +123,7 @@ namespace WarclockBrawl.Player {
             }
 
             // Start moving the player to the point in world where the raycast hit an object.
-            essentials.agent.SetDestination(hit.point);
+            essentials.Agent.SetDestination(hit.point);
         }
 
         /// <summary>
@@ -143,8 +144,14 @@ namespace WarclockBrawl.Player {
         /// Validate the code in the editor at compile time.
         /// </summary>
         private void Validate() {
-            Assert.AreEqual(essentials.agent.GetType(), typeof(NavMeshAgent), AssertUtility.PropertyWrongTypeOrNullErrorMessage("Essentials.Agent", essentials.agent, gameObject));
-            Assert.AreEqual(essentials.camera.GetType(), typeof(Camera), AssertUtility.PropertyWrongTypeOrNullErrorMessage("Essentials.Camera", essentials.camera, gameObject));
+            // References
+            Assert.IsNotNull(essentials?.Agent, AssertUtility.ReferenceIsNotNullErrorMessage(nameof(essentials.Agent), this));
+            Assert.IsNotNull(essentials?.Camera, AssertUtility.ReferenceIsNotNullErrorMessage(nameof(essentials.Camera), this));
+
+            // Components
+            Assert.IsNotNull(gameObject?.transform, AssertUtility.ComponentIsNotNullErrorMessage(nameof(Transform), gameObject));
+            Assert.IsNotNull(GetComponent<NavMeshAgent>(), AssertUtility.ComponentIsNotNullErrorMessage(nameof(NavMeshAgent), gameObject));
+            Assert.IsNotNull(GetComponent<BoxCollider>(), AssertUtility.ComponentIsNotNullErrorMessage(nameof(BoxCollider), gameObject));
         }
     }
 }

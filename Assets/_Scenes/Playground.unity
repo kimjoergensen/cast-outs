@@ -218,6 +218,7 @@ GameObject:
   - component: {fileID: 534669905}
   - component: {fileID: 534669904}
   - component: {fileID: 534669903}
+  - component: {fileID: 534669906}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -278,13 +279,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_LocalRotation: {x: 0.35259077, y: -0.18307585, z: 0.072643586, w: 0.91481465}
-  m_LocalPosition: {x: 8.085019, y: 18.976019, z: -21.722717}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.5005731, y: 0.003357291, z: 0.00032456763, w: 0.8656877}
+  m_LocalPosition: {x: -0.1498948, y: 23.118078, z: -14.985121}
+  m_LocalScale: {x: 1, y: 1.0000004, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 65, y: 0, z: 0}
+--- !u!114 &534669906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 534669902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0781f51071f4ee42ae356d0c15f7845, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  essentials:
+    Camera: {fileID: 0}
+  settings:
+    Boundary: 10
+    Speed: 20
 --- !u!1 &1184958532
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,7 +348,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1184958532}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.1, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1422152950}
@@ -350,8 +367,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   essentials:
-    camera: {fileID: 534669904}
-    agent: {fileID: 1184958533}
+    Camera: {fileID: 534669904}
+    Agent: {fileID: 1184958533}
   inputs:
     Move: 324
     Fire: 323

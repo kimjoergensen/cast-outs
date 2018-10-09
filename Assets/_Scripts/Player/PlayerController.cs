@@ -7,22 +7,17 @@ using WarlockBrawl.Extensions;
 namespace WarclockBrawl.Player {
     [Serializable]
     public class PlayerControllerEssentials {
+        [Tooltip("The camera component a player will be viewing the game from.")]
         public Camera Camera;
+        [Tooltip("The nav mesh agent component on the player object this script is applied to.")]
         public NavMeshAgent Agent;
-    }
-
-    [Serializable]
-    public class PlayerControllerSettings {
-
     }
 
     public class PlayerController : MonoBehaviour {
         #region Inspector menues
-        [Tooltip("Set essential components on the player game object.")]
+        [Tooltip("Essential components on the player game object.")]
         public PlayerControllerEssentials essentials;
-        [Tooltip("Set player game settings.")]
-        public PlayerControllerSettings settings;
-        [Tooltip("Set user input for player controls.")]
+        [Tooltip("User input for player controls.")]
         public InputManager.PlayerInputs inputs;
         #endregion
 
@@ -38,7 +33,6 @@ namespace WarclockBrawl.Player {
         /// </summary>
         public PlayerController() {
             essentials = new PlayerControllerEssentials();
-            settings = new PlayerControllerSettings();
             inputs = new InputManager.PlayerInputs();
         }
 
@@ -66,20 +60,14 @@ namespace WarclockBrawl.Player {
         /// </summary>
         private void FixedUpdate() {
             // Execute player actions
-            if(_moveInputPressed) {
+            if(_moveInputPressed)
                 PlayerActionMove();
-                _moveInputPressed = false;
-            }
 
-            if(_fireInputPressed) {
+            if(_fireInputPressed)
                 PlayerActionFire();
-                _fireInputPressed = false;
-            }
 
-            if(_stopInputPressed) {
+            if(_stopInputPressed)
                 PlayerActionStop();
-                _stopInputPressed = false;
-            }
         }
 
         /// <summary>
@@ -87,19 +75,22 @@ namespace WarclockBrawl.Player {
         /// </summary>
         private void CheckForInput() {
             // Check if the MOVE key has been pressed.
-            if(Input.GetKey(inputs.Move)) {
+            if(Input.GetKey(inputs.Move))
                 _moveInputPressed = true;
-            }
+            else
+                _moveInputPressed = false;
 
             // Check if the FIRE key has been pressed.
-            if(Input.GetKeyDown(inputs.Fire)) {
+            if(Input.GetKeyDown(inputs.Fire))
                 _fireInputPressed = true;
-            }
+            else
+                _fireInputPressed = false;
 
             // Check if the STOP key has been pressed.
-            if(Input.GetKeyDown(inputs.Stop)) {
+            if(Input.GetKeyDown(inputs.Stop))
                 _stopInputPressed = true;
-            }
+            else
+                _stopInputPressed = false;
         }
 
         /// <summary>

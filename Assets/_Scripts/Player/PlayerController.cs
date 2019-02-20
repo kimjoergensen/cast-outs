@@ -40,7 +40,6 @@ namespace WarclockBrawl.Player {
         /// Editor validation
         /// </summary>
         private void OnValidate() {
-            Debug.Log($"Validating {this} script.");
             Validate();
         }
 
@@ -75,22 +74,19 @@ namespace WarclockBrawl.Player {
         /// </summary>
         private void CheckForInput() {
             // Check if the MOVE key has been pressed.
-            if(Input.GetKey(inputs.Move))
-                _moveInputPressed = true;
-            else
-                _moveInputPressed = false;
+            _moveInputPressed = Input.GetKey(inputs.Move)
+                ? true
+                : false;
 
             // Check if the FIRE key has been pressed.
-            if(Input.GetKeyDown(inputs.Fire))
-                _fireInputPressed = true;
-            else
-                _fireInputPressed = false;
+            _fireInputPressed = Input.GetKeyDown(inputs.Fire)
+                ? true
+                : false;
 
             // Check if the STOP key has been pressed.
-            if(Input.GetKeyDown(inputs.Stop))
-                _stopInputPressed = true;
-            else
-                _stopInputPressed = false;
+            _stopInputPressed = Input.GetKeyDown(inputs.Stop)
+                ? true
+                : false;
         }
 
         /// <summary>
@@ -101,17 +97,11 @@ namespace WarclockBrawl.Player {
             Ray ray = essentials.Camera.ScreenPointToRay(Input.mousePosition);
             // Stores the world's X and Y coordinates where the raycast hit.
             RaycastHit hit;
-            // Check if the raycast didn't hit any game objects.
-            if(!Physics.Raycast(ray, out hit)) {
-                // Escape function.
-                return;
-            }
 
-            // Check if the game object hit doesn't have collider on it.
-            if(!hit.transform) {
-                // Escape function.
-                return;
-            }
+            // Escape function if the raycast didn't hit any game objects.
+            if(!Physics.Raycast(ray, out hit)) return;
+            // Escape function if the game object hit doesn't have collider on it.
+            if(!hit.transform) return;
 
             // Start moving the player to the point in world where the raycast hit an object.
             essentials.Agent.SetDestination(hit.point);

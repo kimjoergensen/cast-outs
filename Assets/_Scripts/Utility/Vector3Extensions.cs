@@ -7,8 +7,7 @@ namespace WarlockBrawl.Utility {
         /// Limit the coordinates of a vector in all directions.
         /// </summary>
         /// <param name="limits">Vector3 containing the spectrum that the vector can move within.</param>
-        /// <param name="offset">Offset the limits by adding another Vector3 to the calculations.</param>
-        /// <returns></returns>
+        /// <param name="offset">Add a Vector3 offset to exclude the offset from the calculations.</param>
         public static Vector3 LimitCoordinates(this Vector3 position, Vector3 limits, Vector3? offset = null) {
             // Remove the offset from the limits calculations
             position -= offset ?? Vector3.zero;

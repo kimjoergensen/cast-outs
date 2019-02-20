@@ -52,7 +52,7 @@ namespace WarlockBrawl.Camera {
         /// Gets called after Awake for later instantiation.
         /// </summary>
         private void Start() {
-            // Get the user's screen width and height in pixels.
+            // Instantiate essential variables.
             _screenWidth = Screen.width;
             _screenHeight = Screen.height;
             _desiredCameraPosition = transform.position;
@@ -63,7 +63,6 @@ namespace WarlockBrawl.Camera {
         /// Editor validation
         /// </summary>
         private void OnValidate() {
-            Debug.Log($"Validating {this} script.");
             Validate();
         }
 
@@ -71,7 +70,7 @@ namespace WarlockBrawl.Camera {
         /// Update is called once per frame.
         /// </summary>
         private void Update() {
-            GetDesiredCameraPosition();
+            SetDesiredCameraPosition();
         }
 
         /// <summary>
@@ -80,8 +79,8 @@ namespace WarlockBrawl.Camera {
         /// </summary>
         private void FixedUpdate() {
             // Check if the current camera position is not at the desired camera position.
-            // Meaning the user have made inputs to move the camera.
             if(!transform.position.Equals(_desiredCameraPosition)) {
+                // Move the camera towards the desired camera position.
                 MoveCamera(_desiredCameraPosition);
             }
         }
@@ -89,8 +88,7 @@ namespace WarlockBrawl.Camera {
         /// <summary>
         /// Checks if the mouse position is within the boundary limit of the screen edge.
         /// </summary>
-        /// <returns></returns>
-        private void GetDesiredCameraPosition() {
+        private void SetDesiredCameraPosition() {
             var position = _desiredCameraPosition;
 
             // Check if the mouse is within the boundary of the screen's right edge

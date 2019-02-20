@@ -6,8 +6,11 @@ namespace WarlockBrawl.Extensions {
     /// </summary>
 	public static class AssertUtility {
         /// <summary>
-        /// Used in Assert.IsNotNull for variables references.
+        /// Used in Assert.IsNotNull for variable references.
         /// </summary>
+        /// <example>
+        /// Assert.IsNotNull(variable, AssertUtility.ReferenceIsNotNullErrorMessage(nameof(variable), this));
+        /// </example>
         /// <param name="asserted">The asserted reference.</param>
         /// <param name="script">Should always be 'this'</param>
         public static string ReferenceIsNotNullErrorMessage<TAsserted, TScript>(TAsserted asserted, TScript script) {
@@ -17,6 +20,9 @@ namespace WarlockBrawl.Extensions {
         /// <summary>
         /// Used in Assert.IsNotNull for the game object's components.
         /// </summary>
+        /// <example>
+        /// Assert.IsNotNull(GetComponent<T>(), AssertUtility.ComponentIsNotNullErrorMessage(nameof(T), gameObject));
+        /// </example>
         /// <param name="asserted">The asserted component.</param>
         /// <param name="gameObject">Should always be 'gameObject'</param>
         public static string ComponentIsNotNullErrorMessage<T>(T asserted, GameObject gameObject) {

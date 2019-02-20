@@ -40,12 +40,10 @@ namespace WarlockBrawl.Camera {
         #endregion
 
         /// <summary>
-        /// Gets called when CameraController is initialized.
+        /// Editor validation
         /// </summary>
-        public CameraController() {
-            essentials = new CameraControllerEssentials();
-            settings = new CameraControllerSettings();
-            inputs = new InputManager.CameraInputs();
+        private void OnValidate() {
+            Validate();
         }
 
         /// <summary>
@@ -57,13 +55,6 @@ namespace WarlockBrawl.Camera {
             _screenHeight = Screen.height;
             _desiredCameraPosition = transform.position;
             _offset = transform.position - essentials.Offset.transform.position;
-        }
-
-        /// <summary>
-        /// Editor validation
-        /// </summary>
-        private void OnValidate() {
-            Validate();
         }
 
         /// <summary>

@@ -1,6 +1,5 @@
-﻿using System;
+using System;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.Assertions;
 using WarlockBrawl.Extensions;
 
@@ -9,8 +8,6 @@ namespace WarclockBrawl.Player {
     public class PlayerControllerEssentials {
         [Tooltip("The camera component a player will be viewing the game from.")]
         public Camera Camera;
-        [Tooltip("The nav mesh agent component on the player object this script is applied to.")]
-        public NavMeshAgent Agent;
     }
 
     public class PlayerController : MonoBehaviour {
@@ -27,14 +24,6 @@ namespace WarclockBrawl.Player {
         private bool _fireInputPressed = false;
         private bool _stopInputPressed = false;
         #endregion
-
-        /// <summary>
-        /// Gets called when PlayerController is initialized.
-        /// </summary>
-        public PlayerController() {
-            essentials = new PlayerControllerEssentials();
-            inputs = new InputManager.PlayerInputs();
-        }
 
         /// <summary>
         /// Editor validation
@@ -74,7 +63,7 @@ namespace WarclockBrawl.Player {
         /// </summary>
         private void CheckForInput() {
             // Check if the MOVE key has been pressed.
-            _moveInputPressed = Input.GetKey(inputs.Move)
+            _moveInputPressed = Input.GetKeyDown(inputs.Move)
                 ? true
                 : false;
 
@@ -93,32 +82,21 @@ namespace WarclockBrawl.Player {
         /// Start player movement towards current mouse position.
         /// </summary>
         private void PlayerActionMove() {
-            // Fire a ray from the camera towards the current mouse position;
-            Ray ray = essentials.Camera.ScreenPointToRay(Input.mousePosition);
-            // Stores the world's X and Y coordinates where the raycast hit.
-            RaycastHit hit;
-
-            // Escape function if the raycast didn't hit any game objects.
-            if(!Physics.Raycast(ray, out hit)) return;
-            // Escape function if the game object hit doesn't have collider on it.
-            if(!hit.transform) return;
-
-            // Start moving the player to the point in world where the raycast hit an object.
-            essentials.Agent.SetDestination(hit.point);
+            Debug.Log("I'm moving!");
         }
 
         /// <summary>
         /// Fire currently selected spell.
         /// </summary>
         private void PlayerActionFire() {
-
+            Debug.Log("I'm firing a spell!");
         }
 
         /// <summary>
         /// Stop all player actions.
         /// </summary>
         private void PlayerActionStop() {
-
+            Debug.Log("I'm stopping!");
         }
 
         /// <summary>
@@ -126,13 +104,11 @@ namespace WarclockBrawl.Player {
         /// </summary>
         private void Validate() {
             // References
-            Assert.IsNotNull(essentials?.Agent, AssertUtility.ReferenceIsNotNullErrorMessage(nameof(essentials.Agent), this));
             Assert.IsNotNull(essentials?.Camera, AssertUtility.ReferenceIsNotNullErrorMessage(nameof(essentials.Camera), this));
 
             // Components
             Assert.IsNotNull(gameObject?.transform, AssertUtility.ComponentIsNotNullErrorMessage(nameof(Transform), gameObject));
-            Assert.IsNotNull(GetComponent<NavMeshAgent>(), AssertUtility.ComponentIsNotNullErrorMessage(nameof(NavMeshAgent), gameObject));
-            Assert.IsNotNull(GetComponent<BoxCollider>(), AssertUtility.ComponentIsNotNullErrorMessage(nameof(BoxCollider), gameObject));
+            Assert.IsNotNull(GetComponent<CapsuleCollider>(), AssertUtility.ComponentIsNotNullErrorMessage(nameof(CapsuleCollider), gameObject));
         }
     }
 }

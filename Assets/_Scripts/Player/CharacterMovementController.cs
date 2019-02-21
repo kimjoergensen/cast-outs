@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using WarclockBrawl.Player;
 using WarlockBrawl.Extensions;
+using WarlockBrawl.Utility;
 
 namespace WarlockBrawl.Player {
     [Serializable]
@@ -37,7 +38,7 @@ namespace WarlockBrawl.Player {
         }
 
         private void Start() {
-            _camera = FindCamera();
+            _camera.FindCamera(essentials.motor.essentials.camera);
         }
 
         private void Update() {
@@ -81,14 +82,6 @@ namespace WarlockBrawl.Player {
                 _isMoving = false;
 
             Debug.DrawLine(transform.position, _targetPosition, Color.red);
-        }
-
-        /// <summary>
-        /// Get the camera on the players script.
-        /// Use main camera if no camera is found on player.
-        /// </summary>
-        private UnityEngine.Camera FindCamera() {
-            return essentials.motor.essentials.camera ?? UnityEngine.Camera.main;
         }
 
         private void Validate() {

@@ -1,21 +1,8 @@
-﻿using UnityEngine;
+﻿using WarlockBrawl.Utility;
 
 namespace WarclockBrawl {
-    public class GameManager : MonoBehaviour {
-        public GameManager instance;
-
-        // Initialize the script.
+    public class GameManager : Singleton<GameManager> {
         private void Awake() {
-            if(instance == null) {
-                instance = this;
-            } else if(instance != this) {
-                // Enforces the singleton pattern.
-                Destroy(gameObject);
-            }
-
-            // Keep instance alive when switching scene.
-            DontDestroyOnLoad(gameObject);
-
             InitGame();
         }
 

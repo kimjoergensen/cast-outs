@@ -182,6 +182,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &313954898
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 313954899}
+  m_Layer: 0
+  m_Name: Offset
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &313954899
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313954898}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -23, z: 20}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 534669905}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &396014195
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,7 +255,6 @@ GameObject:
   - component: {fileID: 534669904}
   - component: {fileID: 534669903}
   - component: {fileID: 534669906}
-  - component: {fileID: 534669907}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -290,37 +319,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_LocalRotation: {x: 0.4383711, y: -0, z: -0, w: 0.89879405}
+  m_LocalRotation: {x: 0.44619772, y: 0, z: 0, w: 0.89493436}
   m_LocalPosition: {x: 0, y: 23, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 313954899}
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 52, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 53, y: 0, z: 0}
 --- !u!114 &534669906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 534669902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0781f51071f4ee42ae356d0c15f7845, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  essentials:
-    camera: {fileID: 534669904}
-  settings:
-    MovementSpeed: 5
-    EdgeBoundary: 10
-    MovementLimit: {x: 10, y: 10, z: 10}
-  inputs:
-    MoveRight: 275
-    MoveLeft: 276
-    MoveUp: 273
-    MoveDown: 274
---- !u!114 &534669907
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -333,11 +340,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   essentials:
-    motor: {fileID: 534669906}
+    camera: {fileID: 534669904}
   settings:
     speed: 20
-    edgeBoundary: 20
-    limit: {x: 10, y: 10}
+    boundary: 20
+    limits: {x: 10, y: 10}
 --- !u!1 &1184958532
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,8 +355,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1184958534}
   - component: {fileID: 1184958535}
-  - component: {fileID: 1184958533}
   - component: {fileID: 1184958536}
+  - component: {fileID: 1184958533}
   m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
@@ -366,15 +373,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1184958532}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57ec6c3a324e74c43b47e269d4c9b220, type: 3}
+  m_Script: {fileID: 11500000, guid: 335afecb30a993246b65ea665108e1e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   essentials:
     camera: {fileID: 534669904}
-  inputs:
-    Move: 324
-    Fire: 323
-    Stop: 32
+  settings:
+    speed: 10
 --- !u!4 &1184958534
 Transform:
   m_ObjectHideFlags: 0
@@ -413,13 +418,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1184958532}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 335afecb30a993246b65ea665108e1e8, type: 3}
+  m_Script: {fileID: 11500000, guid: 57ec6c3a324e74c43b47e269d4c9b220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  essentials:
-    motor: {fileID: 1184958533}
-  settings:
-    speed: 5
 --- !u!1 &1422152949
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,7 +510,7 @@ GameObject:
   - component: {fileID: 2073011767}
   - component: {fileID: 2073011766}
   - component: {fileID: 2073011765}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ground
   m_TagString: Ground
   m_Icon: {fileID: 0}

@@ -2,27 +2,19 @@
 using UnityEngine;
 
 namespace WarclockBrawl {
-    public class InputManager {
-        [Serializable]
-        public class PlayerInputs {
-            [Tooltip("Input for moving the player towards the current mouse position.")]
-            public KeyCode Move = KeyCode.Mouse1;
-            [Tooltip("Input to fire the currently selected spell.")]
-            public KeyCode Fire = KeyCode.Mouse0;
-            [Tooltip("Input to stop ongoing player actions.")]
-            public KeyCode Stop = KeyCode.Space;
+    [Serializable]
+    public static class InputManager {
+        public static class PlayerInputs {
+            public static KeyCode Move = KeyCode.Mouse1;            // Input to issue a character movement action.
+            public static KeyCode Fire = KeyCode.Mouse0;            // Input to issue a character fire spell action.
+            public static KeyCode Stop = KeyCode.Space;             // Input to issue the character to stop all actions.
         }
 
-        [Serializable]
-        public class CameraInputs {
-            [Tooltip("Input for panning the camera right.")]
-            public KeyCode MoveRight = KeyCode.RightArrow;
-            [Tooltip("Input for panning the camera left.")]
-            public KeyCode MoveLeft = KeyCode.LeftArrow;
-            [Tooltip("Input for panning the camera up.")]
-            public KeyCode MoveUp = KeyCode.UpArrow;
-            [Tooltip("Input for panning the camera down.")]
-            public KeyCode MoveDown = KeyCode.DownArrow;
+        public static class CameraInputs {
+            public static KeyCode MoveRight = KeyCode.RightArrow;   // Input to move the camera right.
+            public static KeyCode MoveLeft = KeyCode.LeftArrow;     // Input to move the camera left.
+            public static KeyCode MoveUp = KeyCode.UpArrow;         // Input to move the camera up.
+            public static KeyCode MoveDown = KeyCode.DownArrow;     // Input to move the camera down.
         }
     }
 }

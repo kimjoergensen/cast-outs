@@ -1,33 +1,34 @@
 using System;
 using UnityEngine;
 using UnityEngine.Assertions;
+using WarclockBrawl;
 using WarlockBrawl.Extensions;
 using WarlockBrawl.Utility;
 
 namespace WarlockBrawl.Camera {
     [Serializable]
-    public class CameraMovementControllerEssentials {
-        [Tooltip("Set the camera motor this script controls.")]
-        public CameraMotor motor;
+    public class CameraMovementEssentials {
+        [Tooltip("Set the camera this script controls.")]
+        public UnityEngine.Camera camera;
     }
 
     [Serializable]
-    public class CameraMovementControllerSettings {
+    public class CameraMovementSettings {
         [Tooltip("The movement speed of the camera.")]
         public float speed;
         [Tooltip("The amount of pixels from the screen edge the mouse needs to enter before moving the camera.")]
-        public float edgeBoundary;
+        public float boundary;
         [Tooltip("Limits the cameras movemen on the X and Z axis by the amount specified.")]
-        public Vector2 limit;
+        public Vector2 limits;
     }
 
-    public class CameraMovementController : MonoBehaviour
+    public class CameraMovement : MonoBehaviour
     {
         #region Inspector menues
         [Tooltip("Essential components for the camera movement script.")]
-        public CameraMovementControllerEssentials essentials;
+        public CameraMovementEssentials essentials;
         [Tooltip("Settings for the camera movement script.")]
-        public CameraMovementControllerSettings settings;
+        public CameraMovementSettings settings;
         #endregion
 
         #region Class variables
@@ -41,6 +42,7 @@ namespace WarlockBrawl.Camera {
         }
 
         private void Start() {
+            _desiredCameraPosition = transform.position;
             _screenWidth = Screen.width;
             _screenHeight = Screen.height;
         }
@@ -54,7 +56,7 @@ namespace WarlockBrawl.Camera {
             // Check if the current camera position is not at the desired camera position.
             if(!transform.position.Equals(_desiredCameraPosition)) {
                 // Move the camera towards the desired camera position.
-                MoveCamera(_desiredCameraPosition);
+                MoveCamera();
             }
         }
 
@@ -62,44 +64,48 @@ namespace WarlockBrawl.Camera {
         /// Checks if the mouse position is within the boundary limit of the screen edge.
         /// </summary>
         private void SetDesiredCameraPosition() {
-            var position = transform.position;
+            // Get the current desired camera position.
+            var position = _desiredCameraPosition;
 
             // Check if the mouse is within the boundary of the screen's right edge
-            if(Input.mousePosition.x > _screenWidth - settings.edgeBoundary || Input.GetKey(essentials.motor.inputs.MoveRight))
+            if(Input.mousePosition.x > _screenWidth - settings.boundary || Input.GetKey(InputManager.CameraInputs.MoveRight))
                 position.x += settings.speed * Time.deltaTime;
 
             // Check if the mouse is within the boundary of the screen's left edge
-            if(Input.mousePosition.x < settings.edgeBoundary || Input.GetKey(essentials.motor.inputs.MoveLeft))
+            if(Input.mousePosition.x < settings.boundary || Input.GetKey(InputManager.CameraInputs.MoveLeft))
                 position.x -= settings.speed * Time.deltaTime;
 
             // Check if the mouse is within the boundary of the screen's top edge
-            if(Input.mousePosition.y > _screenHeight - settings.edgeBoundary || Input.GetKey(essentials.motor.inputs.MoveUp))
+            if(Input.mousePosition.y > _screenHeight - settings.boundary || Input.GetKey(InputManager.CameraInputs.MoveUp))
                 position.z += settings.speed * Time.deltaTime;
 
             // Check if the mouse is within the boundary of the screen's bottom edge
-            if(Input.mousePosition.y < settings.edgeBoundary || Input.GetKey(essentials.motor.inputs.MoveDown))
+            if(Input.mousePosition.y < settings.boundary || Input.GetKey(InputManager.CameraInputs.MoveDown))
                 position.z -= settings.speed * Time.deltaTime;
 
             // Keep the desired camera position within the directional limits.
-            position.LimitCoordinates(settings.limit);
+            position.LimitCoordinates(settings.limits);
 
             _desiredCameraPosition = position;
         }
 
         /// <summary>
-        /// Moves the camera from the current position towards the expected position.
+        /// Set the camera's position to the desired position.
         /// </summary>
-        /// <param name="desiredCameraPosition">Expected position of the camera after movement.</param>
-        private void MoveCamera(Vector3 desiredCameraPosition) {
-            transform.position = Vector3.MoveTowards(transform.position, _desiredCameraPosition, settings.speed * Time.deltaTime);
+        private void MoveCamera() {
+            transform.position = _desiredCameraPosition;
         }
 
         /// <summary>
         /// Validate the code in the editor at compile time.
         /// </summary>
         private void Validate() {
+            // References
+            Assert.IsNotNull(essentials?.camera, AssertUtility.ReferenceIsNotNullErrorMessage(nameof(essentials.camera), this));
+
             // Components
-            Assert.IsNotNull(GetComponent<CameraMotor>(), AssertUtility.ComponentIsNotNullErrorMessage(nameof(CameraMotor), gameObject));
+            Assert.IsNotNull(gameObject?.transform, AssertUtility.ComponentIsNotNullErrorMessage(nameof(Transform), gameObject));
+            Assert.IsNotNull(GetComponent<UnityEngine.Camera>(), AssertUtility.ComponentIsNotNullErrorMessage(nameof(UnityEngine.Camera), gameObject));
         }
     }
 }

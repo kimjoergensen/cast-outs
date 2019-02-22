@@ -1,34 +1,32 @@
 using System;
 using UnityEngine;
 using UnityEngine.Assertions;
-using WarclockBrawl.Player;
+using WarclockBrawl;
 using WarlockBrawl.Extensions;
-using WarlockBrawl.Utility;
 
 namespace WarlockBrawl.Player {
     [Serializable]
-    public class CharacterMovementControllerEssentials {
-        [Tooltip("Set the player motor this script controls.")]
-        public CharacterMotor motor;
+    public class PlayerMovementEssentials {
+        [Tooltip("Set the camera the user will control the player from.")]
+        public UnityEngine.Camera camera;
     }
 
     [Serializable]
-    public class CharacterMovementControllerSettings {
-        [Tooltip("Determines how fast the player walks.")]
+    public class PlayerMovementSettings {
+        [Tooltip("Determines how fast the player moves.")]
         public float speed;
     }
 
-    public class CharacterMovementController : MonoBehaviour
+    public class PlayerMovement : MonoBehaviour
     {
         #region Inspector menues
         [Tooltip("Essential components for the player movement script.")]
-        public CharacterMovementControllerEssentials essentials;
+        public PlayerMovementEssentials essentials;
         [Tooltip("Settings for the player movement script.")]
-        public CharacterMovementControllerSettings settings;
+        public PlayerMovementSettings settings;
         #endregion
 
         #region Class variables
-        private UnityEngine.Camera _camera;
         private Vector3 _targetPosition;
         private bool _isMoving;
         #endregion
@@ -37,14 +35,10 @@ namespace WarlockBrawl.Player {
             Validate();
         }
 
-        private void Start() {
-            _camera.FindCamera(essentials.motor.essentials.camera);
-        }
-
         private void Update() {
             // Check if the player has pressed the MOVE input key.
-            if(Input.GetKeyDown(essentials.motor.inputs.Move))
-                // Set the targeted position the player wants to move the character to.
+            if(Input.GetKeyDown(InputManager.PlayerInputs.Move))
+                // Set the targeted position the player wants to move the player to.
                 SetTargetPosition();
         }
 
@@ -54,11 +48,11 @@ namespace WarlockBrawl.Player {
         }
 
         /// <summary>
-        /// Set the desired position the player wants to move the character to.
+        /// Set the desired position the player wants to move the player to.
         /// </summary>
         private void SetTargetPosition() {
             // Don't move the player if the user did not click on a ground object.
-            if(!Physics.Raycast(_camera.ScreenPointToRay(Input.mousePosition), out var hit, 100)) return;
+            if(!Physics.Raycast(essentials.camera.ScreenPointToRay(Input.mousePosition), out var hit, 100)) return;
 
             // Don't move the player if the object clicked on does not have a collider on it.
             if(!hit.transform) return;
@@ -70,14 +64,14 @@ namespace WarlockBrawl.Player {
         }
 
         /// <summary>
-        /// Start character movement towards current mouse position.
+        /// Start player movement towards current mouse position.
         /// </summary>
         private void PlayerActionMove() {
             // Turn the player towards the target position and start moving the player to the location.
             transform.LookAt(_targetPosition);
             transform.position = Vector3.MoveTowards(transform.position, _targetPosition, settings.speed * Time.deltaTime);
 
-            // Stop the character when they reach the target position.
+            // Stop the player when they reach the target position.
             if(transform.position == _targetPosition)
                 _isMoving = false;
 
@@ -85,8 +79,11 @@ namespace WarlockBrawl.Player {
         }
 
         private void Validate() {
+            // Referencess
+            Assert.IsNotNull(essentials?.camera, AssertUtility.ReferenceIsNotNullErrorMessage(nameof(Camera), this));
+
             // Components
-            Assert.IsNotNull(GetComponent<CharacterMotor>(), AssertUtility.ComponentIsNotNullErrorMessage(nameof(CharacterMotor), gameObject));
+            Assert.IsNotNull(gameObject?.transform, AssertUtility.ComponentIsNotNullErrorMessage(nameof(Transform), gameObject));
         }
     }
 }

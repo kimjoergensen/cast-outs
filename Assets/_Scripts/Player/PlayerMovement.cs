@@ -17,12 +17,11 @@ namespace WarlockBrawl.Player {
         public float speed;
     }
 
-    public class PlayerMovement : MonoBehaviour
-    {
+    public class PlayerMovement : MonoBehaviour {
         #region Inspector menues
-        [Tooltip("Essential components for the player movement script.")]
+        [Tooltip("Essential components for the PlayerMovement script.")]
         public PlayerMovementEssentials essentials;
-        [Tooltip("Settings for the player movement script.")]
+        [Tooltip("Settings for the PlayerMovement behavior.")]
         public PlayerMovementSettings settings;
         #endregion
 
@@ -30,10 +29,6 @@ namespace WarlockBrawl.Player {
         private Vector3 _targetPosition;
         private bool _isMoving;
         #endregion
-
-        private void OnValidate() {
-            Validate();
-        }
 
         private void Update() {
             // Check if the player has pressed the MOVE input key.
@@ -78,6 +73,14 @@ namespace WarlockBrawl.Player {
             Debug.DrawLine(transform.position, _targetPosition, Color.red);
         }
 
+        #region Validation
+        private void OnValidate() {
+            Validate();
+        }
+
+        /// <summary>
+        /// Validate the code in the editor at compile time.
+        /// </summary>
         private void Validate() {
             // Referencess
             Assert.IsNotNull(essentials?.camera, AssertUtility.ReferenceIsNotNullErrorMessage(nameof(Camera), this));
@@ -85,5 +88,6 @@ namespace WarlockBrawl.Player {
             // Components
             Assert.IsNotNull(gameObject?.transform, AssertUtility.ComponentIsNotNullErrorMessage(nameof(Transform), gameObject));
         }
+        #endregion
     }
 }

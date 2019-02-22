@@ -14,9 +14,9 @@ namespace WarlockBrawl.Player {
 
     public class PlayerMotor : MonoBehaviour {
         #region Inspector menues
-        [Tooltip("Essential components on the player game object.")]
+        [Tooltip("Essential components for the PlayerMotor script.")]
         public PlayerMotorEssentials essentials;
-        [Tooltip("Settings for the player behavior.")]
+        [Tooltip("Settings for the PlayerMotor behavior.")]
         public PlayerMotorSettings settings;
         #endregion
 
@@ -24,6 +24,7 @@ namespace WarlockBrawl.Player {
 
         #endregion
 
+        #region Validation
         private void OnValidate() {
             Validate();
         }
@@ -34,5 +35,6 @@ namespace WarlockBrawl.Player {
         private void Validate() {
 
         }
+        #endregion
     }
 }

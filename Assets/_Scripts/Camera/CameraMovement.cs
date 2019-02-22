@@ -22,12 +22,11 @@ namespace WarlockBrawl.Camera {
         public Vector2 limits;
     }
 
-    public class CameraMovement : MonoBehaviour
-    {
+    public class CameraMovement : MonoBehaviour {
         #region Inspector menues
-        [Tooltip("Essential components for the camera movement script.")]
+        [Tooltip("Essential components for the CameraMovement script.")]
         public CameraMovementEssentials essentials;
-        [Tooltip("Settings for the camera movement script.")]
+        [Tooltip("Settings for the CameraMovement behavior.")]
         public CameraMovementSettings settings;
         #endregion
 
@@ -36,10 +35,6 @@ namespace WarlockBrawl.Camera {
         private int _screenWidth;
         private int _screenHeight;
         #endregion
-
-        private void OnValidate() {
-            Validate();
-        }
 
         private void Start() {
             _desiredCameraPosition = transform.position;
@@ -96,6 +91,11 @@ namespace WarlockBrawl.Camera {
             transform.position = _desiredCameraPosition;
         }
 
+        #region Validation
+        private void OnValidate() {
+            Validate();
+        }
+
         /// <summary>
         /// Validate the code in the editor at compile time.
         /// </summary>
@@ -107,5 +107,6 @@ namespace WarlockBrawl.Camera {
             Assert.IsNotNull(gameObject?.transform, AssertUtility.ComponentIsNotNullErrorMessage(nameof(Transform), gameObject));
             Assert.IsNotNull(GetComponent<UnityEngine.Camera>(), AssertUtility.ComponentIsNotNullErrorMessage(nameof(UnityEngine.Camera), gameObject));
         }
+        #endregion
     }
 }

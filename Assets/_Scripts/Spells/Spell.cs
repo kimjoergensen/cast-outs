@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 using WarlockBrawl.Extensions;
@@ -18,6 +17,8 @@ namespace WarlockBrawl.Spells {
         public string name;
         [Tooltip("Amount of damage applied to target when hit by the spell.")]
         public float damage;
+        [Tooltip("How fast the spell travels.")]
+        public float speed;
     }
 
     public class Spell : MonoBehaviour, ISpell {
@@ -29,34 +30,30 @@ namespace WarlockBrawl.Spells {
         #endregion
 
         #region Class variables
-        private List<ParticleCollisionEvent> _collisionEvents;
+
         #endregion
 
-        private void Start() {
-            _collisionEvents = new List<ParticleCollisionEvent>();
-        }
+        /// <summary>
+        /// Start the <see cref="ParticleSystem"/> set on the spell script and shoot it in the direction of the mouse.
+        /// </summary>
+        /// <param name="player">The player issuing the spell to shoot.</param>
+        public void Shoot(GameObject player) {
+            // Get the current player and mouse position
+            var playerPosition = player.transform.position;
+            var mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y);
+            mousePosition = UnityEngine.Camera.main.ScreenToWorldPoint(mousePosition);
 
-        private void OnParticleCollision(GameObject other) {
-            // Get rigid body on hit game object.
-            var rigidBody = other.GetComponent<Rigidbody>();
+            // Set Y coordinate to always be 2.
+            playerPosition.y = 2;
+            mousePosition.y = 2;
 
-            // Do not apply collision events if the hit game object does not have a rigid body.
-            if(rigidBody == null) return;
+            // Instantiate the spell.
+            var spell = Instantiate(gameObject, playerPosition, Quaternion.identity) as GameObject;
+            spell.transform.LookAt(mousePosition);
 
-            // Get the number of collision events.
-            int eventCount = essentials.particle.GetCollisionEvents(other, _collisionEvents);
-
-            // Itterate each collision event.
-            for(var i = 0; i < eventCount; i++) {
-                var force = _collisionEvents[i].velocity;
-
-                // Add pushback force to hit game object.
-                rigidBody.AddForce(force);
-            }
-        }
-
-        public void Shoot() {
-            throw new NotImplementedException();
+            // Shoot the spell in the direction of the mouse position.
+            transform.position = Vector3.MoveTowards(transform.position, mousePosition, settings.speed * Time.deltaTime);
+            Debug.DrawLine(transform.position, mousePosition, Color.red);
         }
 
         #region Validation

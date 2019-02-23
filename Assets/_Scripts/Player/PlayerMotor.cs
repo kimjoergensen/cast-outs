@@ -1,5 +1,8 @@
 using System;
 using UnityEngine;
+using WarclockBrawl;
+using WarlockBrawl.Spells;
+using WarlockBrawl.Spells.Interfaces;
 
 namespace WarlockBrawl.Player {
     [Serializable]
@@ -21,8 +24,21 @@ namespace WarlockBrawl.Player {
         #endregion
 
         #region Class variables
-
+        private ISpell _pendingSpell;
         #endregion
+
+        public Spell spell;
+
+        private void Start() {
+            _pendingSpell = spell;
+        }
+
+        private void Update() {
+            if (_pendingSpell != null && Input.GetKeyDown(InputManager.PlayerInputs.Fire)) {
+                _pendingSpell.Shoot(gameObject);
+                //_pendingSpell = null;
+            }
+        }
 
         #region Validation
         private void OnValidate() {

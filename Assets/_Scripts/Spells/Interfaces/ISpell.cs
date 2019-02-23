@@ -1,5 +1,7 @@
+using UnityEngine;
+
 namespace WarlockBrawl.Spells.Interfaces {
     public interface ISpell {
-        void Shoot();
+        void Shoot(GameObject player);
     }
 }

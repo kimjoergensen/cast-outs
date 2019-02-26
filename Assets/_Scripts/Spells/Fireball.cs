@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using WarlockBrawl.Utility;
 
 namespace WarlockBrawl.Spells {
     [Serializable]
@@ -32,41 +31,22 @@ namespace WarlockBrawl.Spells {
         #endregion
 
         #region Class variables
-        private Vector3 _direction;
-        private bool _isInstantiated;
+
         #endregion
 
-        private void Start() {
+        /// <inheritdoc />
+        /// <see cref="Interfaces.ISpell"/>
+        public override bool Shoot(Vector3 spawnLocation, Vector3 targetLocation) {
+            // Instantiate the fireball at the spawn location, looking towards the target location.
+            var fireball = Instantiate(gameObject, spawnLocation, Quaternion.identity) as GameObject;
+            fireball.transform.LookAt(targetLocation);
 
-        }
-
-        private void FixedUpdate() {
-            if (_isInstantiated && _direction != null)
-                AddForce(settings.speed);
-        }
-
-        public override bool Shoot(GameObject player) {
-            // Get the current player and mouse position.
-            var playerPosition = player.transform.position;
-
-            // Get the mouse position in world space. Escape method in no position could be found.
-            if (!MousePosition.TryGetPosition(out var mousePosition)) return false;
-
-            // Set Y coordinate to always be 2.
-            playerPosition.y = 2;
-            mousePosition.y = 2;
-
-            // Instantiate the spell.
-            var spell = Instantiate(gameObject, playerPosition, Quaternion.identity) as GameObject;
-            spell.transform.LookAt(mousePosition);
-            _isInstantiated = true;
+            // Move the fireball in a straight line.
+            var rigidbody = fireball.GetComponent<Rigidbody>();
+            rigidbody.velocity = fireball.transform.forward * settings.speed;
 
             // Return spell successfully shot.
             return true;
-        }
-
-        public override Vector3 GetMousePosition() {
-            throw new NotImplementedException();
         }
 
         #region Validation

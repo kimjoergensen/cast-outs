@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using WarlockBrawl.Spells.Interfaces;
 
@@ -12,16 +13,14 @@ namespace WarlockBrawl.Spells {
         private Rigidbody _rigidbody;
         #endregion
 
-        private void Start() {
-            _rigidbody = GetComponent<Rigidbody>();
+        /// <inheritdoc />
+        /// <see cref="ISpell"/>
+        public void DestroyOnMaxDistance() {
+            throw new NotImplementedException();
         }
 
-        public abstract bool Shoot(GameObject player);
-
-        public abstract Vector3 GetMousePosition();
-
-        public void AddForce(float speed) {
-            _rigidbody.AddForce(transform.forward * speed);
-        }
+        /// <inheritdoc />
+        /// <see cref="ISpell"/>
+        public abstract bool Shoot(Vector3 spawnLocation, Vector3 targetLocation);
     }
 }

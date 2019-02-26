@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace WarlockBrawl.Spells.Interfaces {
     public interface ISpell {
-        void Shoot(GameObject player);
+        bool Shoot(GameObject player);
+        Vector3 GetMousePosition();
     }
 }

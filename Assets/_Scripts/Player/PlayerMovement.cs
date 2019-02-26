@@ -46,15 +46,14 @@ namespace WarlockBrawl.Player {
         /// Set the desired position the player wants to move the player to.
         /// </summary>
         private void SetTargetPosition() {
-            // Don't move the player if the user did not click on a ground object.
-            if (!Physics.Raycast(UnityEngine.Camera.main.ScreenPointToRay(Input.mousePosition), out var hit, 100)) return;
-
-            // Don't move the player if the object clicked on does not have a collider on it.
-            if (!hit.transform) return;
+            // Check if the current position of the mouse hits a walkable area.
+            // Store the position hit in a variable.
+            if (!MousePosition.TryGetPosition(out var position, true, LayerMask.NameToLayer("Walkable"))) return;
 
             // Set the target position to the point in space where the player clicked.
-            _targetPosition = hit.point;
+            _targetPosition = position;
 
+            // Set is moving to true, to tell the fixed update method, the player is still moving.
             _isMoving = true;
         }
 

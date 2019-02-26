@@ -27,7 +27,7 @@ namespace WarlockBrawl.Player {
         private ISpell _pendingSpell;
         #endregion
 
-        public Spell spell;
+        public SpellBase spell;
 
         private void Start() {
             _pendingSpell = spell;
@@ -35,8 +35,9 @@ namespace WarlockBrawl.Player {
 
         private void Update() {
             if (_pendingSpell != null && Input.GetKeyDown(InputManager.PlayerInputs.Fire)) {
-                _pendingSpell.Shoot(gameObject);
-                //_pendingSpell = null;
+                if (_pendingSpell.Shoot(gameObject))
+                    Debug.Log("Spell shot");
+                    //_pendingSpell = null;
             }
         }
 

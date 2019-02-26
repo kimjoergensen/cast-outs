@@ -80,7 +80,7 @@ MonoBehaviour:
     name: Fireball
     damage: 20
     speed: 15
-    distance: 100
+    distance: 15
 --- !u!198 &1208524284201003829
 ParticleSystem:
   m_ObjectHideFlags: 0

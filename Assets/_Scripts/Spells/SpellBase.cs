@@ -10,13 +10,22 @@ namespace WarlockBrawl.Spells {
         public abstract float Distance { get; set; }
 
         #region Class variables
-        private Rigidbody _rigidbody;
+        private Vector3 _spawnLocation;
         #endregion
+
+        private void Start() {
+            _spawnLocation = transform.position;
+        }
+
+        private void Update() {
+            DestroyOnMaxDistance();
+        }
 
         /// <inheritdoc />
         /// <see cref="ISpell"/>
         public void DestroyOnMaxDistance() {
-            throw new NotImplementedException();
+            if (Vector3.Distance(_spawnLocation, transform.position) > Distance)
+                Destroy(gameObject);
         }
 
         /// <inheritdoc />

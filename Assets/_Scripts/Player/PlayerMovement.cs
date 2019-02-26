@@ -73,9 +73,7 @@ namespace WarlockBrawl.Player {
         }
 
         #region Validation
-        private void OnValidate() {
-            Validate();
-        }
+        private void OnValidate() => Validate();
 
         /// <summary>
         /// Validate the code in the editor at compile time.

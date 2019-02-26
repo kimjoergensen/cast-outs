@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using WarclockBrawl;
 using WarlockBrawl.Extensions;
-using WarlockBrawl.Utility;
 
 namespace WarlockBrawl.Camera {
     [Serializable]

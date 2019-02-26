@@ -12,7 +12,7 @@ namespace WarlockBrawl.Spells {
         public string name;
         public float damage;
         public float speed;
-        public float distance;
+        public float range;
     }
 
     public class Fireball : SpellBase {
@@ -27,7 +27,7 @@ namespace WarlockBrawl.Spells {
         public override string Name { get => settings.name; set => settings.name = value; }
         public override float Damage { get => settings.damage; set => settings.damage = value; }
         public override float Speed { get => settings.speed; set => settings.speed = value; }
-        public override float Distance { get => settings.distance; set => settings.distance = value; }
+        public override float Range { get => settings.range; set => settings.range = value; }
         #endregion
 
         #region Class variables

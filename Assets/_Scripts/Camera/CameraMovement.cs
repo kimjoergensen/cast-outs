@@ -62,19 +62,19 @@ namespace WarlockBrawl.Camera {
             var position = _desiredCameraPosition;
 
             // Check if the mouse is within the boundary of the screen's right edge
-            if (Input.mousePosition.x > _screenWidth - settings.boundary || Input.GetKey(InputManager.CameraInputs.MoveRight))
+            if ((Input.mousePosition.x > _screenWidth - settings.boundary && Input.mousePosition.x < _screenWidth + 1) || Input.GetKey(InputManager.CameraInputs.MoveRight))
                 position.x += settings.speed * Time.deltaTime;
 
             // Check if the mouse is within the boundary of the screen's left edge
-            if (Input.mousePosition.x < settings.boundary || Input.GetKey(InputManager.CameraInputs.MoveLeft))
+            if ((Input.mousePosition.x < settings.boundary && Input.mousePosition.x > -1) || Input.GetKey(InputManager.CameraInputs.MoveLeft))
                 position.x -= settings.speed * Time.deltaTime;
 
             // Check if the mouse is within the boundary of the screen's top edge
-            if (Input.mousePosition.y > _screenHeight - settings.boundary || Input.GetKey(InputManager.CameraInputs.MoveUp))
+            if ((Input.mousePosition.y > _screenHeight - settings.boundary && Input.mousePosition.y < _screenHeight + 1) || Input.GetKey(InputManager.CameraInputs.MoveUp))
                 position.z += settings.speed * Time.deltaTime;
 
             // Check if the mouse is within the boundary of the screen's bottom edge
-            if (Input.mousePosition.y < settings.boundary || Input.GetKey(InputManager.CameraInputs.MoveDown))
+            if ((Input.mousePosition.y < settings.boundary && Input.mousePosition.y > -1) || Input.GetKey(InputManager.CameraInputs.MoveDown))
                 position.z -= settings.speed * Time.deltaTime;
 
             // TODO: Limit camera movement.

@@ -2,6 +2,11 @@ using UnityEngine;
 
 namespace WarlockBrawl.Spells.Interfaces {
     public interface ISpell {
+        string Name { get; set; }
+        float Damage { get; set; }
+        float Speed { get; set; }
+        float Range { get; set; }
+
         /// <summary>
         /// Shoot the spell from the <paramref name="spawnLocation"/> towards the <paramref name="targetLocation"/>.
         /// </summary>

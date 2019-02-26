@@ -7,7 +7,7 @@ namespace WarlockBrawl.Spells {
         public abstract string Name { get; set; }
         public abstract float Damage { get; set; }
         public abstract float Speed { get; set; }
-        public abstract float Distance { get; set; }
+        public abstract float Range { get; set; }
 
         #region Class variables
         private Vector3 _spawnLocation;
@@ -24,7 +24,7 @@ namespace WarlockBrawl.Spells {
         /// <inheritdoc />
         /// <see cref="ISpell"/>
         public void DestroyOnMaxDistance() {
-            if (Vector3.Distance(_spawnLocation, transform.position) > Distance)
+            if (Vector3.Distance(_spawnLocation, transform.position) > Range)
                 Destroy(gameObject);
         }
 

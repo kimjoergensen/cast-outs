@@ -10,7 +10,9 @@ namespace WarclockBrawl {
             public static KeyCode Stop = KeyCode.Space;             // Issue the player to stop all actions.
 
             // Action bar hotkeys
-            public static KeyCode ActionBarSlot1 = KeyCode.Q;       // Activate object in action bar slot 1.
+            public class Hotkeys {
+                public static KeyCode ActionBarSlot1 = KeyCode.Q;       // Activate object in action bar slot 1.
+            }
         }
 
         public static class CameraInputs {

@@ -1,8 +1,7 @@
-using System;
 using UnityEngine;
 
 namespace WarlockBrawl.Utility {
-    public static class MousePosition {
+    public static class MouseUtility {
         /// <summary>
         /// Shoot a <see cref="Ray"/> from the <see cref="UnityEngine.Camera"/> to the <see cref="Input.mousePosition"/>.
         /// Returns true if a <see cref="Vector3"/> position was found, else returns false.

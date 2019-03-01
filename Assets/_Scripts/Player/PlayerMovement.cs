@@ -48,7 +48,7 @@ namespace WarlockBrawl.Player {
         private void SetTargetPosition() {
             // Check if the current position of the mouse hits a walkable area.
             // Store the position hit in a variable.
-            if (!MousePosition.TryGetPosition(out var position, true, LayerMask.NameToLayer("Walkable"))) return;
+            if (!MouseUtility.TryGetPosition(out var position, true, LayerMask.NameToLayer("Walkable"))) return;
 
             // Set the target position to the point in space where the player clicked.
             _targetPosition = position;
@@ -80,7 +80,7 @@ namespace WarlockBrawl.Player {
         /// </summary>
         private void Validate() {
             // Components
-            Assert.IsNotNull(gameObject?.transform, AssertUtility.ComponentIsNotNullErrorMessage(nameof(Transform), gameObject));
+            Assert.IsNotNull(gameObject?.transform, AssertUtility.ComponentNullErrorMessage(nameof(Transform), gameObject));
         }
         #endregion
     }

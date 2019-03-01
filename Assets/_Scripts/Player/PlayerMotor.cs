@@ -1,11 +1,9 @@
 using System;
-using System.Reflection;
 using UnityEngine;
 using UnityEngine.Assertions;
 using WarclockBrawl;
 using WarlockBrawl.Controls;
 using WarlockBrawl.Extensions;
-using WarlockBrawl.Spells;
 using WarlockBrawl.Spells.Interfaces;
 using WarlockBrawl.Utility;
 
@@ -21,7 +19,7 @@ namespace WarlockBrawl.Player {
 
     }
 
-    public class PlayerMotor : MonoBehaviour {
+    public class PlayerMotor : MonoBehaviour, IObserver<ActionBarButtonInfo> {
         #region Inspector menues
         [Tooltip("Essential components for the PlayerMotor script.")]
         public PlayerMotorEssentials essentials;
@@ -31,23 +29,21 @@ namespace WarlockBrawl.Player {
 
         #region Class variables
         private ISpell _pendingSpell;
+
+        private IDisposable _cancellation;
         #endregion
 
-        public SpellBase spell; // TODO: Remove spell from player motor and let the game set the spells on the action bar.
-
         private void Start() {
-            ActionBar.Instance.SetSpell(InputManager.PlayerInputs.Hotkeys.ActionBarSlot1, spell);
+            // Subscribe to action bar observables.
+            Subscribe(ActionBar.Instance);
+        }
+
+        private void OnDestroy() {
+            // Unsubscribe to action bar observables, when the player dies.
+            Unsubscribe();
         }
 
         private void Update() {
-            // Check for hoykey inputs if the player does not have a pending spell.
-            if (_pendingSpell == null) {
-                if (Input.GetKeyDown(InputManager.PlayerInputs.Hotkeys.ActionBarSlot1))
-                    if (ActionBar.Instance.TryGetSpell(InputManager.PlayerInputs.Hotkeys.ActionBarSlot1, out var spell))
-                        _pendingSpell = spell;
-            }
-
-
             // Check if the player has a pending spell to cast and is pressing the FIRE spell input.
             if (_pendingSpell != null && Input.GetKeyDown(InputManager.PlayerInputs.Fire))
                 ShootSpell();
@@ -59,7 +55,7 @@ namespace WarlockBrawl.Player {
         private void ShootSpell() {
             // Get the mouse position in world space to find the direction the player is casting the spell.
             // Escape the method if no position could be found.
-            if (!MousePosition.TryGetPosition(out var mousePosition)) return;
+            if (!MouseUtility.TryGetPosition(out var mousePosition)) return;
 
             // Turn the player towards the desired direction.
             transform.LookAt(mousePosition);
@@ -67,9 +63,34 @@ namespace WarlockBrawl.Player {
             // Try to shoot the spell.
             if (_pendingSpell.Shoot(essentials.spellSpawnLocation.position, mousePosition))
                 // Remove the spell from the pending spell slot, when the spell is successfully shot.
-                Debug.Log("Remove pending spell.");
-            //_pendingSpell = null;
+                _pendingSpell = null;
         }
+
+        #region IObserver methods
+        public void Subscribe(ActionBar provider) {
+            _cancellation = provider.Subscribe(this);
+        }
+
+        public void Unsubscribe() {
+            _cancellation.Dispose();
+        }
+
+        public void OnCompleted() {
+            throw new NotImplementedException();
+        }
+
+        public void OnError(Exception error) {
+            throw new NotImplementedException();
+        }
+
+        public void OnNext(ActionBarButtonInfo info) {
+            // Do nothing if no spell is passed in info.
+            if (info.Spell == null) return;
+
+            // Set pending spell to the spell passed in info.
+            _pendingSpell = info.Spell;
+        }
+        #endregion
 
         #region Validation
         private void OnValidate() => Validate();
@@ -79,7 +100,7 @@ namespace WarlockBrawl.Player {
         /// </summary>
         private void Validate() {
             // References
-            Assert.IsNotNull(essentials?.spellSpawnLocation, AssertUtility.ReferenceIsNotNullErrorMessage(nameof(Transform), this));
+            Assert.IsNotNull(essentials?.spellSpawnLocation, AssertUtility.ReferenceNullErrorMessage(nameof(Transform), gameObject));
         }
         #endregion
     }

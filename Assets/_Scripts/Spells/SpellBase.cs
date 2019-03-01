@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using WarlockBrawl.Spells.Interfaces;
 
@@ -22,14 +21,14 @@ namespace WarlockBrawl.Spells {
         }
 
         /// <inheritdoc />
-        /// <see cref="ISpell"/>
+        /// <see cref="ISpell.DestroyOnMaxDistance"/>
         public void DestroyOnMaxDistance() {
             if (Vector3.Distance(_spawnLocation, transform.position) > Range)
                 Destroy(gameObject);
         }
 
         /// <inheritdoc />
-        /// <see cref="ISpell"/>
+        /// <see cref="ISpell.Shoot(Vector3, Vector3)"/>
         public abstract bool Shoot(Vector3 spawnLocation, Vector3 targetLocation);
     }
 }

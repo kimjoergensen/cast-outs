@@ -1,45 +1,79 @@
+using System;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
+using UnityEngine.Assertions;
+using WarclockBrawl;
+using WarlockBrawl.Extensions;
 using WarlockBrawl.Spells.Interfaces;
 using WarlockBrawl.Utility;
 
 namespace WarlockBrawl.Controls {
-    public class ActionBar : Singleton<ActionBar> {
-        #region Class variables
-        private static Dictionary<KeyCode, ISpell> _actionBarDictionary = new Dictionary<KeyCode, ISpell>();
+    [Serializable]
+    public class ActionBarEssentials {
+        [Tooltip("Set the list of action bar buttons.")]
+        public List<ActionBarButton> actionBarButtons;
+    }
+
+    [Serializable]
+    public class ActionBarSettings {
+
+    }
+
+    /// <summary>
+    /// Information sent through the <see cref="Observable{T}"/> pattern.
+    /// </summary>
+    public class ActionBarButtonInfo {
+        public ISpell Spell { get; private set; }
+
+        internal ActionBarButtonInfo(ISpell spell) {
+            Spell = spell;
+        }
+    }
+
+    public class ActionBar : Observable<ActionBar, ActionBarButtonInfo> {
+        #region Inspector menues
+        [Tooltip("Essential components for the ActionBar script.")]
+        public ActionBarEssentials essentials;
+        [Tooltip("Settings for the ActionBar behavior.")]
+        public ActionBarSettings settings;
         #endregion
 
-        /// <summary>
-        /// Set an <see cref="ISpell"/> on the action bar slot mapped to <paramref name="keyCode"/>.
-        /// </summary>
-        /// <param name="keyCode"><see cref="KeyCode"/> of the action bar slot.</param>
-        /// <param name="spell"><see cref="ISpell"/> to map to the action bar slot.</param>
-        public void SetSpell(KeyCode keyCode, ISpell spell) {
-            // Check if the key code is already mapped in the dictionary.
-            if (_actionBarDictionary.ContainsKey(keyCode))
-                // Remove the current spell from the dictionary to make room for the new.
-                _actionBarDictionary.Remove(keyCode);
+        #region Class variables
+        private PropertyInfo[] _hotkeyProperties;
+        #endregion
 
-            // Add the new spell to the dictionary with the key code as it's key.
-            _actionBarDictionary.Add(keyCode, spell);
+        private void Awake() {
+            // Get a list of all hotkeys and action bar buttons.
+            _hotkeyProperties = typeof(InputManager.ActionBarHotkeys).GetProperties();
+
+            // Assign a hotkey to the buttons
+            // and subscribe the OnButtonClicked method.
+            foreach (var button in essentials.actionBarButtons) {
+
+                button.OnButtonClicked += OnButtonClicked;
+            }
         }
 
         /// <summary>
-        /// Get the <see cref="ISpell"/> mapped to <paramref name="keyCode"/>.
+        /// Is invoked when a button has been clicked or the hotkey for the button has been pressed.
         /// </summary>
-        /// <param name="keyCode">Action bar <see cref="KeyCode"/> pressed.</param>
-        /// <param name="spell"><see cref="ISpell"/> mapped to the action bar with the pressed <see cref="KeyCode"/></param>
-        /// <returns>True if an <see cref="ISpell"/> was found. False if no <see cref="ISpell"/> was found.</returns>
-        public bool TryGetSpell(KeyCode keyCode, out ISpell spell) {
-            // Set default out value to null.
-            spell = null;
+        /// <param name="spell"></param>
+        private void OnButtonClicked(ISpell spell) {
 
-            // Try to set the out value to the spell mapped on the passed key code.
-            // Returns false if no spell could be found.
-            if (!_actionBarDictionary.TryGetValue(keyCode, out spell)) return false;
-
-            // Return true if a spell is successfully return to the out value.
-            return true;
         }
+
+        #region Validation
+        private void OnValidate() => Validate();
+
+        /// <summary>
+        /// Validate the code in the editor at compile time.
+        /// </summary>
+        private void Validate() {
+            // References
+            Assert.IsNotNull(essentials?.actionBarButtons, AssertUtility.ReferenceNullErrorMessage(typeof(List<ActionBarButton>), gameObject));
+            Assert.IsTrue(essentials?.actionBarButtons.Count > 0, AssertUtility.ListEmptyErrorMessage(nameof(essentials.actionBarButtons), gameObject));
+        }
+        #endregion
     }
 }

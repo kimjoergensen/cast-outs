@@ -101,11 +101,11 @@ namespace WarlockBrawl.Camera {
         /// </summary>
         private void Validate() {
             // References
-            Assert.IsNotNull(essentials?.offset, AssertUtility.ReferenceIsNotNullErrorMessage(nameof(Transform), this));
+            Assert.IsNotNull(essentials?.offset, AssertUtility.ReferenceNullErrorMessage(nameof(Transform), gameObject));
 
             // Components
-            Assert.IsNotNull(gameObject?.transform, AssertUtility.ComponentIsNotNullErrorMessage(nameof(Transform), gameObject));
-            Assert.IsNotNull(GetComponent<UnityEngine.Camera>(), AssertUtility.ComponentIsNotNullErrorMessage(nameof(UnityEngine.Camera), gameObject));
+            Assert.IsNotNull(gameObject?.transform, AssertUtility.ComponentNullErrorMessage(nameof(Transform), gameObject));
+            Assert.IsNotNull(GetComponent<UnityEngine.Camera>(), AssertUtility.ComponentNullErrorMessage(nameof(UnityEngine.Camera), gameObject));
         }
         #endregion
     }

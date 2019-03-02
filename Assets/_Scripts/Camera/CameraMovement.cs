@@ -100,12 +100,11 @@ namespace WarlockBrawl.Camera {
         /// Validate the code in the editor at compile time.
         /// </summary>
         private void Validate() {
-            // References
-            Assert.IsNotNull(essentials?.offset, AssertUtility.ReferenceNullErrorMessage(nameof(Transform), gameObject));
-
-            // Components
-            Assert.IsNotNull(gameObject?.transform, AssertUtility.ComponentNullErrorMessage(nameof(Transform), gameObject));
-            Assert.IsNotNull(GetComponent<UnityEngine.Camera>(), AssertUtility.ComponentNullErrorMessage(nameof(UnityEngine.Camera), gameObject));
+            Assert.IsNotNull(essentials.offset, AssertErrorMessage.NotNull<Transform>(nameof(essentials.offset), gameObject));
+            Assert.IsTrue(settings.speed.GreaterThan(default), AssertErrorMessage.GreaterThan(nameof(settings.speed), default, gameObject));
+            Assert.IsTrue(settings.boundary.GreaterThan(default), AssertErrorMessage.GreaterThan(nameof(settings.boundary), default, gameObject));
+            Assert.IsTrue(settings.limits.x.GreaterThan(default), AssertErrorMessage.GreaterThan(nameof(settings.limits.x), default, gameObject));
+            Assert.IsTrue(settings.limits.y.GreaterThan(default), AssertErrorMessage.GreaterThan(nameof(settings.limits.y), default, gameObject));
         }
         #endregion
     }

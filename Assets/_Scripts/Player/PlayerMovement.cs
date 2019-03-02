@@ -79,8 +79,7 @@ namespace WarlockBrawl.Player {
         /// Validate the code in the editor at compile time.
         /// </summary>
         private void Validate() {
-            // Components
-            Assert.IsNotNull(gameObject?.transform, AssertUtility.ComponentNullErrorMessage(nameof(Transform), gameObject));
+            Assert.IsTrue(settings.speed.GreaterThan(default), AssertErrorMessage.GreaterThan(nameof(settings.speed), default, gameObject));
         }
         #endregion
     }

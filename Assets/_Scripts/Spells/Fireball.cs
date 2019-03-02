@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using UnityEngine.Assertions;
+using WarlockBrawl.Extensions;
 
 namespace WarlockBrawl.Spells {
     [Serializable]
@@ -15,6 +17,9 @@ namespace WarlockBrawl.Spells {
         public float range;
     }
 
+    [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(SphereCollider))]
+    [RequireComponent(typeof(ParticleSystem))]
     public class Fireball : SpellBase {
         #region Inspector menues
         [Tooltip("Essential components for the Fireball script.")]
@@ -56,7 +61,10 @@ namespace WarlockBrawl.Spells {
         /// Validate the code in the editor at compile time.
         /// </summary>
         private void Validate() {
-
+            Assert.IsTrue(settings.name.NotEmpty(), AssertErrorMessage.NotEmpty(nameof(settings.name), gameObject));
+            Assert.IsTrue(settings.damage.GreaterThan(default), AssertErrorMessage.GreaterThan(nameof(settings.damage), default, gameObject));
+            Assert.IsTrue(settings.speed.GreaterThan(default), AssertErrorMessage.GreaterThan(nameof(settings.speed), default, gameObject));
+            Assert.IsTrue(settings.range.GreaterThan(default), AssertErrorMessage.GreaterThan(nameof(settings.range), default, gameObject));
         }
         #endregion
     }

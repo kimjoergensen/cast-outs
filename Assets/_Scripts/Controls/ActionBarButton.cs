@@ -16,6 +16,7 @@ namespace WarlockBrawl.Controls {
 
     }
 
+    [RequireComponent(typeof(Button))]
     public class ActionBarButton : MonoBehaviour {
         #region Inspector menues
         [Tooltip("Essential components for the ActionBarButton script.")]
@@ -49,8 +50,7 @@ namespace WarlockBrawl.Controls {
         /// Validate the code in the editor at compile time.
         /// </summary>
         private void Validate() {
-            // Components.
-            Assert.IsNotNull(GetComponentInParent<ActionBar>(), AssertUtility.ReferenceNullErrorMessage(nameof(ActionBar), gameObject));
+            Assert.IsNotNull(GetComponentInParent<ActionBarButton>(), AssertErrorMessage.ChildOf<ActionBar>(gameObject.name));
         }
         #endregion
     }

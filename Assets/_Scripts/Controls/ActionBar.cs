@@ -70,9 +70,7 @@ namespace WarlockBrawl.Controls {
         /// Validate the code in the editor at compile time.
         /// </summary>
         private void Validate() {
-            // References
-            Assert.IsNotNull(essentials?.actionBarButtons, AssertUtility.ReferenceNullErrorMessage(typeof(List<ActionBarButton>), gameObject));
-            Assert.IsTrue(essentials?.actionBarButtons.Count > 0, AssertUtility.ListEmptyErrorMessage(nameof(essentials.actionBarButtons), gameObject));
+            Assert.IsTrue(essentials.actionBarButtons.NotEmpty(), AssertErrorMessage.NotEmpty(nameof(essentials.actionBarButtons), gameObject));
         }
         #endregion
     }

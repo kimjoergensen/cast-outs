@@ -99,8 +99,7 @@ namespace WarlockBrawl.Player {
         /// Validate the code in the editor at compile time.
         /// </summary>
         private void Validate() {
-            // References
-            Assert.IsNotNull(essentials?.spellSpawnLocation, AssertUtility.ReferenceNullErrorMessage(nameof(Transform), gameObject));
+            Assert.IsNotNull(essentials.spellSpawnLocation, AssertErrorMessage.NotNull<Transform>(nameof(essentials.spellSpawnLocation), gameObject));
         }
         #endregion
     }

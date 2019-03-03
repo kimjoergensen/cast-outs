@@ -43,16 +43,14 @@ namespace WarlockBrawl.Controls {
         private PropertyInfo[] _hotkeyProperties;
         #endregion
 
-        private void Awake() {
+        private void Start() {
             // Get a list of all hotkeys and action bar buttons.
             _hotkeyProperties = typeof(InputManager.ActionBarHotkeys).GetProperties();
 
             // Assign a hotkey to the buttons
             // and subscribe the OnButtonClicked method.
-            foreach (var button in essentials.actionBarButtons) {
-
-                button.OnButtonClicked += OnButtonClicked;
-            }
+            foreach (var button in essentials.actionBarButtons)
+                button.EventHandler += OnButtonClicked;
         }
 
         /// <summary>
@@ -60,7 +58,8 @@ namespace WarlockBrawl.Controls {
         /// </summary>
         /// <param name="spell"></param>
         private void OnButtonClicked(ISpell spell) {
-
+            foreach (var observer in Observers)
+                observer.OnNext(new ActionBarButtonInfo(spell));
         }
 
         #region Validation
@@ -70,7 +69,11 @@ namespace WarlockBrawl.Controls {
         /// Validate the code in the editor at compile time.
         /// </summary>
         private void Validate() {
+            // Components
+
+            // References
             Assert.IsTrue(essentials.actionBarButtons.NotEmpty(), AssertErrorMessage.NotEmpty(nameof(essentials.actionBarButtons), gameObject));
+            Assert.IsTrue(essentials.actionBarButtons.TrueForAll(button => button != null), AssertErrorMessage.NotNull<ActionBarButton>(nameof(essentials.actionBarButtons), gameObject));
         }
         #endregion
     }

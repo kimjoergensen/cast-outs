@@ -1,8 +1,10 @@
 using System;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using WarlockBrawl.Extensions;
+using WarlockBrawl.Spells;
 using WarlockBrawl.Spells.Interfaces;
 
 namespace WarlockBrawl.Controls {
@@ -17,6 +19,7 @@ namespace WarlockBrawl.Controls {
     }
 
     [RequireComponent(typeof(Button))]
+    [RequireComponent(typeof(Image))]
     public class ActionBarButton : MonoBehaviour {
         #region Inspector menues
         [Tooltip("Essential components for the ActionBarButton script.")]
@@ -26,21 +29,35 @@ namespace WarlockBrawl.Controls {
         #endregion
 
         #region Class variables
-        public event Action<ISpell> OnButtonClicked;
+        public UnityAction<ISpell> EventHandler;
 
         private ISpell _spell;
         #endregion
 
+        public SpellBase spell;
+
         private void Awake() {
-            GetComponent<Button>().onClick.AddListener(HandleClick);
+            // Add the HandleEvent method to the buttons on click events.
+            // This will call the HandleEvent method whenever the button is clicked by the mouse.
+            GetComponent<Button>().onClick.AddListener(HandleEvent);
+            _spell = spell;
         }
 
-        private void HandleClick() {
+        /// <summary>
+        /// Handles what happens when the button has been activated by a mouse click or the hotkey.
+        /// </summary>
+        private void HandleEvent() {
+            Debug.Log("Action bar clicked");
             // Do nothing if no spell has been assigned to the action bar button.
             if (_spell == null) return;
 
+            // Make a temporary copy of the event to avoid possibility of
+            // a race condition if the last subscriber unsubscribes
+            // immediately after the null check and before the event is raised.
+            var handler = EventHandler;
+
             // Invoke all subscribers on the delegate and pass the spell to their parameter.
-            OnButtonClicked?.Invoke(_spell);
+            handler?.Invoke(_spell);
         }
 
         #region Validation
@@ -50,7 +67,13 @@ namespace WarlockBrawl.Controls {
         /// Validate the code in the editor at compile time.
         /// </summary>
         private void Validate() {
+            // Components
+            Assert.IsNotNull(GetComponent<Button>(), AssertErrorMessage.NotNull<Button>(gameObject));
+            Assert.IsNotNull(GetComponent<Image>(), AssertErrorMessage.NotNull<Image>(gameObject));
             Assert.IsNotNull(GetComponentInParent<ActionBarButton>(), AssertErrorMessage.ChildOf<ActionBar>(gameObject.name));
+
+            // References
+
         }
         #endregion
     }

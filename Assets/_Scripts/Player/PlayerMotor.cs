@@ -84,8 +84,8 @@ namespace WarlockBrawl.Player {
         }
 
         public void OnNext(ActionBarButtonInfo info) {
-            // Do nothing if no spell is passed in info.
-            if (info.Spell == null) return;
+            // Do nothing the player already have a pending spell
+            if (_pendingSpell != null) return;
 
             // Set pending spell to the spell passed in info.
             _pendingSpell = info.Spell;
@@ -99,6 +99,9 @@ namespace WarlockBrawl.Player {
         /// Validate the code in the editor at compile time.
         /// </summary>
         private void Validate() {
+            // Components
+
+            // References
             Assert.IsNotNull(essentials.spellSpawnLocation, AssertErrorMessage.NotNull<Transform>(nameof(essentials.spellSpawnLocation), gameObject));
         }
         #endregion

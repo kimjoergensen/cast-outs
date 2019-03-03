@@ -132,6 +132,10 @@ namespace WarlockBrawl.Extensions {
             return $"{asserted} needs to have at least one nested game object with the {typeof(T)} script attached.";
         }
 
+        public static string NotNull<T>(GameObject gameObject) {
+            return $"{gameObject.name} is missing a component of type {typeof(T)}";
+        }
+
         public static string NotNull<T>(string asserted, GameObject gameObject) {
             return $"A {typeof(T)} needs to be assigned to {asserted} on {gameObject.name}.";
         }

@@ -9,11 +9,11 @@ namespace WarlockBrawl.Utility {
     /// <typeparam name="TInfo">Class containing the information sent with the <see cref="IObservable{T}"/> pattern.</typeparam>
     public class Observable<TInfo> : MonoBehaviour, IObservable<TInfo> where TInfo : class {
         #region Class variables
-        private List<IObserver<TInfo>> _observers;
+        private List<IObserver<TInfo>> Observers;
         #endregion
 
         public Observable() {
-            _observers = new List<IObserver<TInfo>>();
+            Observers = new List<IObserver<TInfo>>();
         }
 
         /// <summary>
@@ -23,13 +23,13 @@ namespace WarlockBrawl.Utility {
         /// <returns><see cref="IDisposable"/> to dispose of the <see cref="IObserver{T}"/> when unsubscribing.</returns>
         public IDisposable Subscribe(IObserver<TInfo> observer) {
             // Check whether observer is already registered.
-            if (!_observers.Contains(observer)) {
+            if (!Observers.Contains(observer)) {
                 // Add observer to the list of observers.
-                _observers.Add(observer);
+                Observers.Add(observer);
             }
 
             // Return an IDisposable unsubscriber to the observer.
-            return new Unsubscriber<TInfo>(_observers, observer);
+            return new Unsubscriber<TInfo>(Observers, observer);
         }
 
         /// <summary>
@@ -61,11 +61,11 @@ namespace WarlockBrawl.Utility {
     /// <typeparam name="TInfo">Class containing the information sent with the <see cref="IObservable{T}"/> pattern.</typeparam>
     public class Observable<TProvider, TInfo> : Singleton<TProvider>, IObservable<TInfo> where TProvider : MonoBehaviour where TInfo : class {
         #region Class variables
-        private List<IObserver<TInfo>> _observers;
+        public List<IObserver<TInfo>> Observers;
         #endregion
 
         public Observable() {
-            _observers = new List<IObserver<TInfo>>();
+            Observers = new List<IObserver<TInfo>>();
         }
 
         /// <summary>
@@ -75,13 +75,13 @@ namespace WarlockBrawl.Utility {
         /// <returns><see cref="IDisposable"/> to dispose of the <see cref="IObserver{T}"/> when unsubscribing.</returns>
         public IDisposable Subscribe(IObserver<TInfo> observer) {
             // Check whether observer is already registered.
-            if (!_observers.Contains(observer)) {
+            if (!Observers.Contains(observer)) {
                 // Add observer to the list of observers.
-                _observers.Add(observer);
+                Observers.Add(observer);
             }
 
             // Return an IDisposable unsubscriber to the observer.
-            return new Unsubscriber<TInfo>(_observers, observer);
+            return new Unsubscriber<TInfo>(Observers, observer);
         }
 
         /// <summary>

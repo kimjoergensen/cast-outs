@@ -61,6 +61,12 @@ namespace WarlockBrawl.Spells {
         /// Validate the code in the editor at compile time.
         /// </summary>
         private void Validate() {
+            // Components
+            Assert.IsNotNull(GetComponent<Rigidbody>(), AssertErrorMessage.NotNull<Rigidbody>(gameObject));
+            Assert.IsNotNull(GetComponent<SphereCollider>(), AssertErrorMessage.NotNull<SphereCollider>(gameObject));
+            Assert.IsNotNull(GetComponent<ParticleSystem>(), AssertErrorMessage.NotNull<ParticleSystem>(gameObject));
+
+            // References
             Assert.IsTrue(settings.name.NotEmpty(), AssertErrorMessage.NotEmpty(nameof(settings.name), gameObject));
             Assert.IsTrue(settings.damage.GreaterThan(default), AssertErrorMessage.GreaterThan(nameof(settings.damage), default, gameObject));
             Assert.IsTrue(settings.speed.GreaterThan(default), AssertErrorMessage.GreaterThan(nameof(settings.speed), default, gameObject));

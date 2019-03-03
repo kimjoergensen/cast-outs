@@ -7,6 +7,7 @@ namespace WarlockBrawl.Spells {
         public abstract float Damage { get; set; }
         public abstract float Speed { get; set; }
         public abstract float Range { get; set; }
+        public abstract Sprite Image { get; set; }
 
         #region Class variables
         private Vector3 _spawnLocation;

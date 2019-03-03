@@ -31,16 +31,30 @@ namespace WarlockBrawl.Controls {
         #region Class variables
         public UnityAction<ISpell> EventHandler;
 
+        private Button _button;
+        private Image _image;
         private ISpell _spell;
         #endregion
 
+        // TODO: Let spell be selected by in-game spell shop.
         public SpellBase spell;
 
         private void Awake() {
             // Add the HandleEvent method to the buttons on click events.
             // This will call the HandleEvent method whenever the button is clicked by the mouse.
-            GetComponent<Button>().onClick.AddListener(HandleEvent);
+            _button = GetComponent<Button>();
+            _image = GetComponent<Image>();
             _spell = spell;
+        }
+
+        private void Start() {
+            _button.onClick.AddListener(HandleEvent);
+
+            // TODO: Load sprite when spell is selected on action bar.
+            if (_spell != null) {
+                _image.color = Color.white;
+                _image.sprite = _spell.Image;
+            }
         }
 
         /// <summary>

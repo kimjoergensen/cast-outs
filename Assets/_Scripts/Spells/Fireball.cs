@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.UI;
 using WarlockBrawl.Extensions;
 
 namespace WarlockBrawl.Spells {
@@ -15,6 +16,7 @@ namespace WarlockBrawl.Spells {
         public float damage;
         public float speed;
         public float range;
+        public Sprite image;
     }
 
     [RequireComponent(typeof(Rigidbody))]
@@ -33,6 +35,7 @@ namespace WarlockBrawl.Spells {
         public override float Damage { get => settings.damage; set => settings.damage = value; }
         public override float Speed { get => settings.speed; set => settings.speed = value; }
         public override float Range { get => settings.range; set => settings.range = value; }
+        public override Sprite Image { get => settings.image; set => settings.image = value; }
         #endregion
 
         #region Class variables
@@ -71,6 +74,7 @@ namespace WarlockBrawl.Spells {
             Assert.IsTrue(settings.damage.GreaterThan(default), AssertErrorMessage.GreaterThan(nameof(settings.damage), default, gameObject));
             Assert.IsTrue(settings.speed.GreaterThan(default), AssertErrorMessage.GreaterThan(nameof(settings.speed), default, gameObject));
             Assert.IsTrue(settings.range.GreaterThan(default), AssertErrorMessage.GreaterThan(nameof(settings.range), default, gameObject));
+            Assert.IsNotNull(settings.image, AssertErrorMessage.NotNull<Image>(nameof(settings.image), gameObject));
         }
         #endregion
     }

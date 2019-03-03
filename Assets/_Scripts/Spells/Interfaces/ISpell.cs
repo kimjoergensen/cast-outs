@@ -6,6 +6,7 @@ namespace WarlockBrawl.Spells.Interfaces {
         float Damage { get; set; }
         float Speed { get; set; }
         float Range { get; set; }
+        Sprite Image { get; set; }
 
         /// <summary>
         /// Shoot the spell from the <paramref name="spawnLocation"/> towards the <paramref name="targetLocation"/>.

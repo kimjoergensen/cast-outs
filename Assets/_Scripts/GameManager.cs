@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using WarlockBrawl.Utility;
+﻿using CastOuts.Utility;
+using UnityEngine;
 
-namespace WarclockBrawl {
+namespace CastOuts {
     public class GameManagerEssentials {
 
     }

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace WarlockBrawl.Utility {
+namespace CastOuts.Utility {
     /// <summary>
     /// Applies <see cref="IObservable{TInfo}"/> pattern to the class.
     /// </summary>

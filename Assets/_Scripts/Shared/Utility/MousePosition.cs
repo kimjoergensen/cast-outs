@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace WarlockBrawl.Utility {
+namespace CastOuts.Utility {
     public static class MouseUtility {
         /// <summary>
         /// Shoot a <see cref="Ray"/> from the <see cref="UnityEngine.Camera"/> to the <see cref="Input.mousePosition"/>.

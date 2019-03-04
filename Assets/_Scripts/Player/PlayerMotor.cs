@@ -1,13 +1,13 @@
+using CastOuts.Controls;
+using CastOuts.Shared.DataTransferObjects;
+using CastOuts.Shared.Utility;
+using CastOuts.Spells.Interfaces;
+using CastOuts.Utility;
 using System;
 using UnityEngine;
 using UnityEngine.Assertions;
-using WarclockBrawl;
-using WarlockBrawl.Controls;
-using WarlockBrawl.Extensions;
-using WarlockBrawl.Spells.Interfaces;
-using WarlockBrawl.Utility;
 
-namespace WarlockBrawl.Player {
+namespace CastOuts.Player {
     [Serializable]
     public class PlayerMotorEssentials {
         [Tooltip("Set the location the player will shoot spells from.")]
@@ -45,7 +45,7 @@ namespace WarlockBrawl.Player {
 
         private void Update() {
             // Check if the player has a pending spell to cast and is pressing the FIRE spell input.
-            if (_pendingSpell != null && Input.GetKeyDown(InputManager.PlayerInputs.Fire))
+            if (_pendingSpell != null && Input.GetKeyDown(InputManager.Player.Fire))
                 ShootSpell();
         }
 
@@ -85,7 +85,7 @@ namespace WarlockBrawl.Player {
 
         public void OnNext(ActionBarButtonInfo info) {
             // Do nothing the player already have a pending spell
-            if (_pendingSpell != null) return;
+            if (info.Spell != null) return;
 
             // Set pending spell to the spell passed in info.
             _pendingSpell = info.Spell;

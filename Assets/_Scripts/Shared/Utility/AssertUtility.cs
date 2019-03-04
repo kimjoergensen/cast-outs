@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace WarlockBrawl.Extensions {
+namespace CastOuts.Shared.Utility {
     /// <summary>
     /// Prints error messages for the Assert library.
     /// </summary>

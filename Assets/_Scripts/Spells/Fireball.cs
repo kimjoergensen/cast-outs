@@ -1,10 +1,10 @@
+using CastOuts.Shared.Utility;
 using System;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UI;
-using WarlockBrawl.Extensions;
 
-namespace WarlockBrawl.Spells {
+namespace CastOuts.Spells {
     [Serializable]
     public class FireballEssentials {
 

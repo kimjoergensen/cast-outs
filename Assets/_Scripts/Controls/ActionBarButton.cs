@@ -1,13 +1,13 @@
+using CastOuts.Shared.Utility;
+using CastOuts.Spells;
+using CastOuts.Spells.Interfaces;
 using System;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using WarlockBrawl.Extensions;
-using WarlockBrawl.Spells;
-using WarlockBrawl.Spells.Interfaces;
 
-namespace WarlockBrawl.Controls {
+namespace CastOuts.Controls {
     [Serializable]
     public class ActionBarButtonEssentials {
 

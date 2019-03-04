@@ -1,14 +1,14 @@
+using CastOuts.Shared.DataTransferObjects;
+using CastOuts.Shared.Utility;
+using CastOuts.Spells.Interfaces;
+using CastOuts.Utility;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.Assertions;
-using WarclockBrawl;
-using WarlockBrawl.Extensions;
-using WarlockBrawl.Spells.Interfaces;
-using WarlockBrawl.Utility;
 
-namespace WarlockBrawl.Controls {
+namespace CastOuts.Controls {
     [Serializable]
     public class ActionBarEssentials {
         [Tooltip("Set the list of action bar buttons.")]
@@ -18,17 +18,6 @@ namespace WarlockBrawl.Controls {
     [Serializable]
     public class ActionBarSettings {
 
-    }
-
-    /// <summary>
-    /// Information sent through the <see cref="Observable{T}"/> pattern.
-    /// </summary>
-    public class ActionBarButtonInfo {
-        public ISpell Spell { get; private set; }
-
-        internal ActionBarButtonInfo(ISpell spell) {
-            Spell = spell;
-        }
     }
 
     public class ActionBar : Observable<ActionBar, ActionBarButtonInfo> {
@@ -45,7 +34,7 @@ namespace WarlockBrawl.Controls {
 
         private void Start() {
             // Get a list of all hotkeys and action bar buttons.
-            _hotkeyProperties = typeof(InputManager.ActionBarHotkeys).GetProperties();
+            _hotkeyProperties = typeof(InputManager.ActionBarButtons).GetProperties();
 
             // Assign a hotkey to the buttons
             // and subscribe the OnButtonClicked method.

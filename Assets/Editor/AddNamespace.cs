@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
+/// <summary>
+/// Enables the use of #NAMESPACE# in the script templates
+/// to automatically apply the namespace of the scripts
+/// when the scripts are created.
+/// </summary>
 public class AddNameSpace : UnityEditor.AssetModificationProcessor {
     public static void OnWillCreateAsset(string path) {
         path = path.Replace(".meta", "");
@@ -14,7 +19,7 @@ public class AddNameSpace : UnityEditor.AssetModificationProcessor {
 
         string lastPart = path.Substring(path.IndexOf("_Scripts"));
         string _namespace = lastPart.Substring(0, lastPart.LastIndexOf('/'));
-        _namespace = _namespace.Replace('/', '.').Replace("_Scripts", "WarlockBrawl");
+        _namespace = _namespace.Replace('/', '.').Replace("_Scripts", "CastOuts");
         file = file.Replace("#NAMESPACE#", _namespace);
 
         System.IO.File.WriteAllText(path, file);

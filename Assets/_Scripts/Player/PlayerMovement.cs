@@ -1,11 +1,10 @@
+using CastOuts.Shared.Utility;
+using CastOuts.Utility;
 using System;
 using UnityEngine;
 using UnityEngine.Assertions;
-using WarclockBrawl;
-using WarlockBrawl.Extensions;
-using WarlockBrawl.Utility;
 
-namespace WarlockBrawl.Player {
+namespace CastOuts.Player {
     [Serializable]
     public class PlayerMovementEssentials {
 
@@ -32,7 +31,7 @@ namespace WarlockBrawl.Player {
 
         private void Update() {
             // Check if the player has pressed the MOVE input key.
-            if (Input.GetKeyDown(InputManager.PlayerInputs.Move))
+            if (Input.GetKeyDown(InputManager.Player.Move))
                 // Set the targeted position the player wants to move the player to.
                 SetTargetPosition();
         }

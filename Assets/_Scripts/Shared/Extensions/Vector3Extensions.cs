@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace WarlockBrawl.Utility.Extensions {
+namespace CastOuts.Shared.Extensions {
     public static class Vector3Extensions{
         /// <summary>
         /// Limit the coordinates of a vector in all directions.

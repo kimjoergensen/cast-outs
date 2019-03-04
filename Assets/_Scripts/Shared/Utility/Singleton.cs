@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace WarlockBrawl.Utility {
+namespace CastOuts.Utility {
     public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         #region Class variables

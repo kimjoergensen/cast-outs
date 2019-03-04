@@ -1,7 +1,7 @@
+using CastOuts.Spells.Interfaces;
 using UnityEngine;
-using WarlockBrawl.Spells.Interfaces;
 
-namespace WarlockBrawl.Spells {
+namespace CastOuts.Spells {
     public abstract class SpellBase : MonoBehaviour, ISpell {
         public abstract string Name { get; set; }
         public abstract float Damage { get; set; }

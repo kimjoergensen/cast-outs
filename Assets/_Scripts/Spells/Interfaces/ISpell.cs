@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace WarlockBrawl.Spells.Interfaces {
+namespace CastOuts.Spells.Interfaces {
     public interface ISpell {
         string Name { get; set; }
         float Damage { get; set; }

@@ -38,15 +38,19 @@ namespace CastOuts {
         /// <summary>
         /// Returns true while the user holds down the key identified by the <see cref="Keybinding"/>.
         /// </summary>
-        public bool GetKey(Keybinding hotkey) {
-            return Input.GetKey(essentials.keyBindings.GetKey(hotkey));
+        public bool GetKey(Keybinding keybinding) {
+            return Input.GetKey(essentials.keyBindings.GetKey(keybinding));
         }
 
         /// <summary>
         /// Returns true during the frame the user starts pressing down the key identified by the <see cref="Keybinding"/>.
         /// </summary>
-        public bool GetKeyDown(Keybinding hotkey) {
-            return Input.GetKeyDown(essentials.keyBindings.GetKey(hotkey));
+        public bool GetKeyDown(Keybinding keybinding) {
+            return Input.GetKeyDown(essentials.keyBindings.GetKey(keybinding));
+        }
+
+        public KeyCode GetHotkey(Keybinding keybinding) {
+            return essentials.keyBindings.GetKey(keybinding);
         }
 
         #region Validation

@@ -67,8 +67,8 @@ namespace CastOuts {
         public CameraKeyBindings cameraKeyBindings;
         #endregion
 
-        public KeyCode GetKey(Keybinding hotkey) {
-            switch (hotkey) {
+        public KeyCode GetKey(Keybinding keybinding) {
+            switch (keybinding) {
                 case Keybinding.PlayerMove:
                     return playerKeyBindings.Move;
 

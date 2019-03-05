@@ -34,12 +34,13 @@ namespace CastOuts.Controls {
 
         #region Class variables
         /// <summary>
-        /// The event handler
+        /// The event handler.
         /// </summary>
         public UnityAction<ISpell> EventHandler;
 
         private Button _button;
         private Image _image;
+        private Text _text;
         private ISpell _spell;
         #endregion
 
@@ -47,21 +48,24 @@ namespace CastOuts.Controls {
         public SpellBase spell;
 
         private void Awake() {
-            // Add the HandleEvent method to the buttons on click events.
-            // This will call the HandleEvent method whenever the button is clicked by the mouse.
             _button = GetComponent<Button>();
             _image = GetComponent<Image>();
+            _text = GetComponentInChildren<Text>();
             _spell = spell;
         }
 
         private void Start() {
-            _button.onClick.AddListener(HandleEvent);
+            // Set the text on the button to the assigned hotkey.
+            _text.text = Enum.GetName(typeof(KeyCode), InputManager.Instance.GetHotkey(settings.KeyBinding));
 
-            // TODO: Load sprite when spell is selected on action bar.
+            // Set the spells thumbnail image on the button.
             if (_spell != null) {
                 _image.color = Color.white;
                 _image.sprite = _spell.Image;
             }
+
+            // Add an event listener to mouse click on the button.
+            _button.onClick.AddListener(HandleEvent);
         }
 
         private void Update() {
@@ -97,6 +101,7 @@ namespace CastOuts.Controls {
             Assert.IsNotNull(GetComponent<Button>(), AssertErrorMessage.NotNull<Button>(gameObject));
             Assert.IsNotNull(GetComponent<Image>(), AssertErrorMessage.NotNull<Image>(gameObject));
             Assert.IsNotNull(GetComponentInParent<ActionBarButton>(), AssertErrorMessage.ChildOf<ActionBar>(gameObject.name));
+            Assert.IsNotNull(GetComponentInChildren<Text>(), AssertErrorMessage.ParentOf<Text>(gameObject.name));
 
             // References
         }

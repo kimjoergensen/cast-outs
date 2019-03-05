@@ -125,11 +125,11 @@ namespace CastOuts.Shared.Utility {
         }
 
         public static string ChildOf<T>(string asserted) {
-            return $"{asserted} needs to be nested under a game object with the {typeof(T)} script attached.";
+            return $"{asserted} needs to be nested under a game object with a {typeof(T)} component attached.";
         }
 
         public static string ParentOf<T>(string asserted) {
-            return $"{asserted} needs to have at least one nested game object with the {typeof(T)} script attached.";
+            return $"{asserted} needs to have at least one nested game object with a {typeof(T)} component attached.";
         }
 
         public static string NotNull<T>(GameObject gameObject) {

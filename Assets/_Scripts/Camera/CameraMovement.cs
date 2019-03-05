@@ -64,19 +64,19 @@ namespace CastOuts.Camera {
             var position = _desiredCameraPosition;
 
             // Check if the mouse is within the boundary of the screen's right edge
-            if ((Input.mousePosition.x > _screenWidth - settings.boundary && Input.mousePosition.x < _screenWidth + 1) || InputManager.Instance.GetKey(Hotkey.CameraMoveRight))
+            if ((Input.mousePosition.x > _screenWidth - settings.boundary && Input.mousePosition.x < _screenWidth + 1) || InputManager.Instance.GetKey(Keybinding.CameraMoveRight))
                 position.x += settings.speed * Time.deltaTime;
 
             // Check if the mouse is within the boundary of the screen's left edge
-            if ((Input.mousePosition.x < settings.boundary && Input.mousePosition.x > -1) || InputManager.Instance.GetKey(Hotkey.CameraMoveLeft))
+            if ((Input.mousePosition.x < settings.boundary && Input.mousePosition.x > -1) || InputManager.Instance.GetKey(Keybinding.CameraMoveLeft))
                 position.x -= settings.speed * Time.deltaTime;
 
             // Check if the mouse is within the boundary of the screen's top edge
-            if ((Input.mousePosition.y > _screenHeight - settings.boundary && Input.mousePosition.y < _screenHeight + 1) || InputManager.Instance.GetKey(Hotkey.CameraMoveUp))
+            if ((Input.mousePosition.y > _screenHeight - settings.boundary && Input.mousePosition.y < _screenHeight + 1) || InputManager.Instance.GetKey(Keybinding.CameraMoveUp))
                 position.z += settings.speed * Time.deltaTime;
 
             // Check if the mouse is within the boundary of the screen's bottom edge
-            if ((Input.mousePosition.y < settings.boundary && Input.mousePosition.y > -1) || InputManager.Instance.GetKey(Hotkey.CameraMoveDown))
+            if ((Input.mousePosition.y < settings.boundary && Input.mousePosition.y > -1) || InputManager.Instance.GetKey(Keybinding.CameraMoveDown))
                 position.z -= settings.speed * Time.deltaTime;
 
             // TODO: Limit camera movement.

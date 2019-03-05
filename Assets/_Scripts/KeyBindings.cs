@@ -40,7 +40,7 @@ namespace CastOuts {
         public KeyCode CameraMoveDown = KeyCode.DownArrow;
     }
 
-    public enum Hotkey {
+    public enum Keybinding {
         PlayerMove,
         PlayerFire,
         PlayerStop,
@@ -67,45 +67,45 @@ namespace CastOuts {
         public CameraKeyBindings cameraKeyBindings;
         #endregion
 
-        public KeyCode GetKey(Hotkey hotkey) {
+        public KeyCode GetKey(Keybinding hotkey) {
             switch (hotkey) {
-                case Hotkey.PlayerMove:
+                case Keybinding.PlayerMove:
                     return playerKeyBindings.Move;
 
-                case Hotkey.PlayerFire:
+                case Keybinding.PlayerFire:
                     return playerKeyBindings.Fire;
 
-                case Hotkey.PlayerStop:
+                case Keybinding.PlayerStop:
                     return playerKeyBindings.Stop;
 
-                case Hotkey.ActionBarButton1:
+                case Keybinding.ActionBarButton1:
                     return actionBarKeyBindings.ActionBarButton1;
 
-                case Hotkey.ActionBarButton2:
+                case Keybinding.ActionBarButton2:
                     return actionBarKeyBindings.ActionBarButton2;
 
-                case Hotkey.ActionBarButton3:
+                case Keybinding.ActionBarButton3:
                     return actionBarKeyBindings.ActionBarButton3;
 
-                case Hotkey.ActionBarButton4:
+                case Keybinding.ActionBarButton4:
                     return actionBarKeyBindings.ActionBarButton4;
 
-                case Hotkey.ActionBarButton5:
+                case Keybinding.ActionBarButton5:
                     return actionBarKeyBindings.ActionBarButton5;
 
-                case Hotkey.ActionBarButton6:
+                case Keybinding.ActionBarButton6:
                     return actionBarKeyBindings.ActionBarButton6;
 
-                case Hotkey.CameraMoveRight:
+                case Keybinding.CameraMoveRight:
                     return cameraKeyBindings.CameraMoveRight;
 
-                case Hotkey.CameraMoveLeft:
+                case Keybinding.CameraMoveLeft:
                     return cameraKeyBindings.CamereMoveLeft;
 
-                case Hotkey.CameraMoveUp:
+                case Keybinding.CameraMoveUp:
                     return cameraKeyBindings.CameraMoveUp;
 
-                case Hotkey.CameraMoveDown:
+                case Keybinding.CameraMoveDown:
                     return cameraKeyBindings.CameraMoveDown;
 
                 default:

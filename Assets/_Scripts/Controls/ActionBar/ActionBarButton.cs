@@ -15,7 +15,8 @@ namespace CastOuts.Controls {
 
     [Serializable]
     public class ActionBarButtonSettings {
-        public Hotkey KeyBinding;
+        [Tooltip("Set which key binding is mapped to the action bar button.")]
+        public Keybinding KeyBinding;
     }
 
     /// <summary>
@@ -61,6 +62,11 @@ namespace CastOuts.Controls {
                 _image.color = Color.white;
                 _image.sprite = _spell.Image;
             }
+        }
+
+        private void Update() {
+            if (InputManager.Instance.GetKeyDown(settings.KeyBinding))
+                HandleEvent();
         }
 
         /// <summary>

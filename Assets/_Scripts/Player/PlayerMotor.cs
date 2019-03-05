@@ -48,7 +48,7 @@ namespace CastOuts.Player {
 
         private void Update() {
             // Check if the player has a pending spell to cast and is pressing the FIRE spell input.
-            if (_pendingSpell != null && InputManager.Instance.GetKeyDown(Hotkey.PlayerFire))
+            if (_pendingSpell != null && InputManager.Instance.GetKeyDown(Keybinding.PlayerFire))
                 ShootSpell();
         }
 

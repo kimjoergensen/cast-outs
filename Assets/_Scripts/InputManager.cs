@@ -36,16 +36,16 @@ namespace CastOuts {
         private InputManager() { }
 
         /// <summary>
-        /// Returns true while the user holds down the key identified by the <see cref="Hotkey"/>.
+        /// Returns true while the user holds down the key identified by the <see cref="Keybinding"/>.
         /// </summary>
-        public bool GetKey(Hotkey hotkey) {
+        public bool GetKey(Keybinding hotkey) {
             return Input.GetKey(essentials.keyBindings.GetKey(hotkey));
         }
 
         /// <summary>
-        /// Returns true during the frame the user starts pressing down the key identified by the <see cref="Hotkey"/>.
+        /// Returns true during the frame the user starts pressing down the key identified by the <see cref="Keybinding"/>.
         /// </summary>
-        public bool GetKeyDown(Hotkey hotkey) {
+        public bool GetKeyDown(Keybinding hotkey) {
             return Input.GetKeyDown(essentials.keyBindings.GetKey(hotkey));
         }
 

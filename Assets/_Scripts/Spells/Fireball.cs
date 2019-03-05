@@ -31,10 +31,29 @@ namespace CastOuts.Spells {
         #endregion
 
         #region SpellBase properties
+        /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
         public override string Name { get => settings.name; set => settings.name = value; }
+
+        /// <summary>
+        /// Gets or sets the damage.
+        /// </summary>
         public override float Damage { get => settings.damage; set => settings.damage = value; }
+
+        /// <summary>
+        /// Gets or sets the speed.
+        /// </summary>
         public override float Speed { get => settings.speed; set => settings.speed = value; }
+
+        /// <summary>
+        /// Gets or sets the range.
+        /// </summary>
         public override float Range { get => settings.range; set => settings.range = value; }
+
+        /// <summary>
+        /// Gets or sets the image.
+        /// </summary>
         public override Sprite Image { get => settings.image; set => settings.image = value; }
         #endregion
 
@@ -42,8 +61,12 @@ namespace CastOuts.Spells {
 
         #endregion
 
-        /// <inheritdoc />
-        /// <see cref="Interfaces.ISpell"/>
+        /// <summary>
+        /// Shoot the spell from the <paramref name="spawnLocation" /> towards the <paramref name="targetLocation" />.
+        /// </summary>
+        /// <param name="spawnLocation"><see cref="Vector3"/> object holding the position the spell will be shot from.</param>
+        /// <param name="targetLocation"><see cref="Vector3"/> object holding the position the spell will be traveling towards.</param>
+        /// <returns>True if the spell was instantiated, false if not.</returns>
         public override bool Shoot(Vector3 spawnLocation, Vector3 targetLocation) {
             // Instantiate the fireball at the spawn location, looking towards the target location.
             var fireball = Instantiate(gameObject, spawnLocation, Quaternion.identity) as GameObject;
@@ -60,9 +83,7 @@ namespace CastOuts.Spells {
         #region Validation
         private void OnValidate() => Validate();
 
-        /// <summary>
-        /// Validate the code in the editor at compile time.
-        /// </summary>
+        /// <summary>Validates this instance.</summary>
         private void Validate() {
             // Components
             Assert.IsNotNull(GetComponent<Rigidbody>(), AssertErrorMessage.NotNull<Rigidbody>(gameObject));

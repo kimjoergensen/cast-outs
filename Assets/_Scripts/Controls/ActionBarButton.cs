@@ -18,6 +18,9 @@ namespace CastOuts.Controls {
 
     }
 
+    /// <summary>
+    /// Invokes the <see cref="ActionBar"/> class when an action bar button has been pressed.
+    /// </summary>
     [RequireComponent(typeof(Button))]
     [RequireComponent(typeof(Image))]
     public class ActionBarButton : MonoBehaviour {
@@ -29,6 +32,9 @@ namespace CastOuts.Controls {
         #endregion
 
         #region Class variables
+        /// <summary>
+        /// The event handler
+        /// </summary>
         public UnityAction<ISpell> EventHandler;
 
         private Button _button;
@@ -78,7 +84,7 @@ namespace CastOuts.Controls {
         private void OnValidate() => Validate();
 
         /// <summary>
-        /// Validate the code in the editor at compile time.
+        /// Validates this instance.
         /// </summary>
         private void Validate() {
             // Components

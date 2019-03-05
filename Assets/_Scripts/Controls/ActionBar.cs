@@ -1,7 +1,6 @@
 using CastOuts.Shared.DataTransferObjects;
 using CastOuts.Shared.Utility;
 using CastOuts.Spells.Interfaces;
-using CastOuts.Utility;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -20,6 +19,11 @@ namespace CastOuts.Controls {
 
     }
 
+    /// <summary>
+    /// Container for <see cref="ActionBarButton"/>.
+    /// <para></para>
+    /// </summary>
+    /// <seealso cref="Shared.Utility.Observable{ActionBar, ActionBarButtonInfo}" />
     public class ActionBar : Observable<ActionBar, ActionBarButtonInfo> {
         #region Inspector menues
         [Tooltip("Essential components for the ActionBar script.")]

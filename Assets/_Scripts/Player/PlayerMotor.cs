@@ -2,7 +2,6 @@ using CastOuts.Controls;
 using CastOuts.Shared.DataTransferObjects;
 using CastOuts.Shared.Utility;
 using CastOuts.Spells.Interfaces;
-using CastOuts.Utility;
 using System;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -19,6 +18,10 @@ namespace CastOuts.Player {
 
     }
 
+    /// <summary>
+    /// Core script for the player game object.
+    /// </summary>
+    /// <remarks>Keeps track of the players health, knockback, buffs, debuffs.</remarks>
     public class PlayerMotor : MonoBehaviour, IObserver<ActionBarButtonInfo> {
         #region Inspector menues
         [Tooltip("Essential components for the PlayerMotor script.")]
@@ -67,24 +70,42 @@ namespace CastOuts.Player {
         }
 
         #region IObserver methods
+        /// <summary>
+        /// Subscribes to the specified provider.
+        /// </summary>
+        /// <param name="provider">The provider.</param>
         public void Subscribe(ActionBar provider) {
             _cancellation = provider.Subscribe(this);
         }
 
+        /// <summary>
+        /// Unsubscribes this instance.
+        /// </summary>
         public void Unsubscribe() {
             _cancellation.Dispose();
         }
 
+        /// <summary>
+        /// Called when [completed].
+        /// </summary>
         public void OnCompleted() {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Called when [error].
+        /// </summary>
+        /// <param name="error">The error.</param>
         public void OnError(Exception error) {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Called when [next].
+        /// </summary>
+        /// <param name="info">The information.</param>
         public void OnNext(ActionBarButtonInfo info) {
-            // Do nothing the player already have a pending spell
+            // Do nothing if no spell was passed.
             if (info.Spell != null) return;
 
             // Set pending spell to the spell passed in info.
@@ -96,7 +117,7 @@ namespace CastOuts.Player {
         private void OnValidate() => Validate();
 
         /// <summary>
-        /// Validate the code in the editor at compile time.
+        /// Validates this instance.
         /// </summary>
         private void Validate() {
             // Components

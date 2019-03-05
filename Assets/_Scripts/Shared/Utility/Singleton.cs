@@ -1,6 +1,10 @@
 using UnityEngine;
 
-namespace CastOuts.Utility {
+namespace CastOuts.Shared.Utility {
+    /// <summary>
+    /// Applies the singleton pattern to <typeparamref name="T"/>
+    /// </summary>
+    /// <typeparam name="T">Class to apply the singleton pattern to.</typeparam>
     public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         #region Class variables
@@ -10,9 +14,8 @@ namespace CastOuts.Utility {
         #endregion
 
         /// <summary>
-        /// Access singleton instance through this property.
+        /// Gets the instance.
         /// </summary>
-        /// <returns></returns>
         public static T Instance {
             get {
                 if(_isShuttingDown) {
@@ -45,16 +48,10 @@ namespace CastOuts.Utility {
             }
         }
 
-        /// <summary>
-        /// Is called when application is shutting down.
-        /// </summary>
         private void OnApplicationQuit() {
             _isShuttingDown = true;
         }
 
-        /// <summary>
-        /// Is called when game object is being destroyed.
-        /// </summary>
         private void OnDestroy() {
             _isShuttingDown = true;
         }

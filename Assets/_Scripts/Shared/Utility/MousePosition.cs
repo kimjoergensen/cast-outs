@@ -1,17 +1,23 @@
 using UnityEngine;
 
-namespace CastOuts.Utility {
+namespace CastOuts.Shared.Utility {
     public static class MouseUtility {
         /// <summary>
-        /// Shoot a <see cref="Ray"/> from the <see cref="UnityEngine.Camera"/> to the <see cref="Input.mousePosition"/>.
-        /// Returns true if a <see cref="Vector3"/> position was found, else returns false.
-        /// Out the <see cref="Vector3"/> position in world space where the <see cref="Ray"/> hit.
+        /// Tries to get the currnet mouse position in world space.
         /// </summary>
-        /// <param name="position"></param>
-        /// <param name="shouldHaveTransform"></param>
-        /// <param name="layerMask"></param>
-        /// <returns></returns>
-        public static bool TryGetPosition(out Vector3 position, bool shouldHaveTransform = false, LayerMask? layerMask = null) {
+        /// <param name="position">The position.</param>
+        /// <param name="shouldHaveTransform">if set to <c>true</c> [should have transform].</param>
+        /// <param name="layerMask">The layer mask.</param>
+        /// <returns>True if a position could be found, false if not.</returns>
+        /// <example>
+        /// Use the class with an if-statement, to check if the mouse position can be found, and store it as a local variable to use in the if-statement's code-block.
+        /// <code>
+        /// if (!MouseUtility.TryGetPosition(out var position, true, null) {
+        ///     // Do something with the mouse position..
+        /// }
+        /// </code>
+        /// </example>
+        public static bool TryGetPosition(out Vector3 position, bool shouldHaveTransform = true, LayerMask? layerMask = null) {
             // Set default value for position in case the methods returns false.
             position = new Vector3();
 

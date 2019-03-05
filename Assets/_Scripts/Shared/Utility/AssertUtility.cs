@@ -5,9 +5,9 @@ using UnityEngine.Assertions;
 
 namespace CastOuts.Shared.Utility {
     /// <summary>
-    /// Prints error messages for the Assert library.
+    /// Utility class for assertions.
     /// </summary>
-	public static class AssertUtility {
+    public static class AssertUtility {
         /// <summary>
         /// Used with <see cref="Assert.IsTrue(bool)"/> to assert that <paramref name="asserted"/> is not null or empty.
         /// </summary>

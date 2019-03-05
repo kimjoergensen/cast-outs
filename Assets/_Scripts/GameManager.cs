@@ -1,4 +1,4 @@
-﻿using CastOuts.Utility;
+﻿using CastOuts.Shared.Utility;
 using UnityEngine;
 
 namespace CastOuts {
@@ -10,6 +10,11 @@ namespace CastOuts {
 
     }
 
+    /// <summary>
+    /// Manages the state of the game.
+    /// </summary>
+    /// <remarks>Keeps track of rounds, score.</remarks>
+    /// <seealso cref="Utility.Singleton{GameManager}"/>
     public class GameManager : Singleton<GameManager> {
         #region Inspector menues
         [Tooltip("Essential components for the GameManager script.")]
@@ -26,9 +31,7 @@ namespace CastOuts {
             InitGame();
         }
 
-        /// <summary>
-        /// Inialize a game.
-        /// </summary>
+        /// <summary>Initializes the game.</summary>
         private void InitGame() {
 
         }
@@ -36,9 +39,7 @@ namespace CastOuts {
         #region Validation
         private void OnValidate() => Validate();
 
-        /// <summary>
-        /// Validate the code in the editor at compile time.
-        /// </summary>
+        /// <summary>Validates this instance.</summary>
         private void Validate() {
 
         }

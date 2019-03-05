@@ -20,6 +20,9 @@ namespace CastOuts.Camera {
         public Vector2 limits;
     }
 
+    /// <summary>
+    /// Controls the camera's movement
+    /// </summary>
     public class CameraMovement : MonoBehaviour {
         #region Inspector menues
         [Tooltip("Essential components for the CameraMovement script.")]
@@ -47,7 +50,7 @@ namespace CastOuts.Camera {
 
         private void FixedUpdate() {
             // Check if the current camera position is not at the desired camera position.
-            if (!transform.position.Equals(_desiredCameraPosition)) {
+            if (Vector3.Distance(transform.position, _desiredCameraPosition) > 0.1f) {
                 // Move the camera towards the desired camera position.
                 MoveCamera();
             }

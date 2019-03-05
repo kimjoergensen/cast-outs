@@ -1,5 +1,4 @@
 using CastOuts.Shared.Utility;
-using CastOuts.Utility;
 using System;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -16,6 +15,9 @@ namespace CastOuts.Player {
         public float speed;
     }
 
+    /// <summary>
+    /// Controls the player's movement.
+    /// </summary>
     public class PlayerMovement : MonoBehaviour {
         #region Inspector menues
         [Tooltip("Essential components for the PlayerMovement script.")]
@@ -42,7 +44,7 @@ namespace CastOuts.Player {
         }
 
         /// <summary>
-        /// Set the desired position the player wants to move the player to.
+        /// Sets the target position.
         /// </summary>
         private void SetTargetPosition() {
             // Check if the current position of the mouse hits a walkable area.
@@ -57,7 +59,7 @@ namespace CastOuts.Player {
         }
 
         /// <summary>
-        /// Start player movement towards current mouse position.
+        /// Moves the player towards target destination.
         /// </summary>
         private void PlayerActionMove() {
             // Turn the player towards the target position and start moving the player to the location.
@@ -75,7 +77,7 @@ namespace CastOuts.Player {
         private void OnValidate() => Validate();
 
         /// <summary>
-        /// Validate the code in the editor at compile time.
+        /// Validates this instance.
         /// </summary>
         private void Validate() {
             // Components

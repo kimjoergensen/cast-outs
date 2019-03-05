@@ -2,52 +2,87 @@
 
 namespace CastOuts {
     /// <summary>
-    /// Holds information of all hotkeys.
+    /// Store all key bindings for the user.
     /// </summary>
     public static class InputManager {
         /// <summary>
-        /// Use this class to get or set player hotkeys.
+        /// Player input key bindings.
         /// </summary>
         public static class Player {
             /// <summary>
-            /// Get or set the <see cref="KeyCode"/> to issue the player to move to the current mouse position.
+            /// Gets or sets the the move key binding.
             /// </summary>
-            public static KeyCode Move = KeyCode.Mouse1;
+            public static KeyCode Move { get => KeyCode.Mouse1; set => Move = value; }
 
             /// <summary>
-            /// Get or set the <see cref="KeyCode"/> to issue the player to fire their pending spell.
+            /// Gets og sets the fire spell key binding.
             /// </summary>
-            public static KeyCode Fire = KeyCode.Mouse0;
+            public static KeyCode Fire { get => KeyCode.Mouse0; set => Fire = value; }
 
             /// <summary>
-            /// Get or set the <see cref="KeyCode"/> to issue the player to stop all their actions.
+            /// Gets og sets the stop all actions key binding.
             /// </summary>
-            public static KeyCode Stop = KeyCode.Space;
+            public static KeyCode Stop { get => KeyCode.Space; set => Stop = value; }
         }
 
         /// <summary>
-        /// Use this class to get or set action bar button hotkeys.
+        /// Action bar button key bindings.
         /// </summary>
         public class ActionBarButtons {
             /// <summary>
-            /// Get or set the <see cref="KeyCode"/> to activate the object in <names
+            /// Gets or sets the action bar slot 1 key binding.
             /// </summary>
-            public static KeyCode ActionBarSlot1 = KeyCode.Q;
-            public static KeyCode ActionBarSlot2 = KeyCode.W;
-            public static KeyCode ActionBarSlot3 = KeyCode.E;
-            public static KeyCode ActionBarSlot4 = KeyCode.R;
-            public static KeyCode ActionBarSlot5 = KeyCode.D;
-            public static KeyCode ActionBarSlot6 = KeyCode.F;
+            public static KeyCode ActionBarSlot1 { get => KeyCode.Q; set => ActionBarSlot1 = value; }
+
+            /// <summary>
+            /// Gets or set the action bar slot 2 key binding.
+            /// </summary>
+            public static KeyCode ActionBarSlot2 { get => KeyCode.W; set => ActionBarSlot2 = value; }
+
+            /// <summary>
+            /// Gets or set the action bar slot 3 key binding.
+            /// </summary>
+            public static KeyCode ActionBarSlot3 { get => KeyCode.E; set => ActionBarSlot3 = value; }
+
+            /// <summary>
+            /// Gets or sets the action bar slot 4 key binding.
+            /// </summary>
+            public static KeyCode ActionBarSlot4 { get => KeyCode.R; set => ActionBarSlot4 = value; }
+
+            /// <summary>
+            /// Gets or sets the action bar slot 5 key binding.
+            /// </summary>
+            public static KeyCode ActionBarSlot5 { get => KeyCode.D; set => ActionBarSlot5 = value; }
+
+            /// <summary>
+            /// Gets or sets the action bar slot 6 key binding.
+            /// </summary>
+            public static KeyCode ActionBarSlot6 { get => KeyCode.F; set => ActionBarSlot6 = value; }
         }
 
         /// <summary>
-        /// Use this class to get or set cameta hotkeys.
+        /// Camera input key bindings.
         /// </summary>
         public static class Camera {
-            public static KeyCode MoveRight = KeyCode.RightArrow;
-            public static KeyCode MoveLeft = KeyCode.LeftArrow;
-            public static KeyCode MoveUp = KeyCode.UpArrow;
-            public static KeyCode MoveDown = KeyCode.DownArrow;
+            /// <summary>
+            /// Gets or sets the move right key binding.
+            /// </summary>
+            public static KeyCode MoveRight { get => KeyCode.RightArrow; set => MoveRight = value; }
+
+            /// <summary>
+            /// Gets or sets the move right left binding.
+            /// </summary>
+            public static KeyCode MoveLeft { get => KeyCode.LeftArrow; set => MoveLeft = value; }
+
+            /// <summary>
+            /// Gets or sets the move up key binding.
+            /// </summary>
+            public static KeyCode MoveUp { get => KeyCode.UpArrow; set => MoveUp = value; }
+
+            /// <summary>
+            /// Gets or sets the move down key binding.
+            /// </summary>
+            public static KeyCode MoveDown { get => KeyCode.DownArrow; set => MoveDown = value; }
         }
     }
 }

@@ -27,6 +27,11 @@ namespace CastOuts {
 
         #endregion
 
+        /// <summary>
+        /// Prevents a default instance of the <see cref="GameManager"/> class from being created.
+        /// </summary>
+        private GameManager() { }
+
         private void Awake() {
             InitGame();
         }

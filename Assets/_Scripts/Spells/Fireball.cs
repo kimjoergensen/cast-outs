@@ -72,6 +72,13 @@ namespace CastOuts.Spells {
             var fireball = Instantiate(gameObject, spawnLocation, Quaternion.identity) as GameObject;
             fireball.transform.LookAt(targetLocation);
 
+            // Set the fireballs rotation on the X axis back to zero, so it always flies horizontally.
+            fireball.transform.eulerAngles = new Vector3 {
+                x = 0.0f,
+                y = fireball.transform.eulerAngles.y,
+                z = fireball.transform.eulerAngles.z
+            };
+
             // Move the fireball in a straight line.
             var rigidbody = fireball.GetComponent<Rigidbody>();
             rigidbody.velocity = fireball.transform.forward * settings.speed;

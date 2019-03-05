@@ -33,7 +33,7 @@ namespace CastOuts.Player {
 
         private void Update() {
             // Check if the player has pressed the MOVE input key.
-            if (Input.GetKeyDown(InputManager.Player.Move))
+            if (InputManager.Instance.GetKeyDown(Hotkey.PlayerMove))
                 // Set the targeted position the player wants to move the player to.
                 SetTargetPosition();
         }

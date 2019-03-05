@@ -1,88 +1,66 @@
-﻿using UnityEngine;
+﻿using CastOuts.Shared.Utility;
+using System;
+using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace CastOuts {
+    [Serializable]
+    public class InputManagerEssentials {
+        public KeyBindings keyBindings;
+    }
+
+    [Serializable]
+    public class InputManagerSettings {
+
+    }
+
     /// <summary>
-    /// Store all key bindings for the user.
+    /// Replaces Unity's input manager.
+    /// Used to have better control of key bindings.
     /// </summary>
-    public static class InputManager {
+    public class InputManager : Singleton<InputManager> {
+        #region Inspector menus
+        [Tooltip("Essential components for the InputManager script.")]
+        public InputManagerEssentials essentials;
+        [Tooltip("Settings for the InputManager behavior.")]
+        public InputManagerSettings settings;
+        #endregion
+
+        #region Class variables
+
+        #endregion
+
         /// <summary>
-        /// Player input key bindings.
+        /// Prevents a default instance of the <see cref="InputManager"/> class from being created.
         /// </summary>
-        public static class Player {
-            /// <summary>
-            /// Gets or sets the the move key binding.
-            /// </summary>
-            public static KeyCode Move { get => KeyCode.Mouse1; set => Move = value; }
+        private InputManager() { }
 
-            /// <summary>
-            /// Gets og sets the fire spell key binding.
-            /// </summary>
-            public static KeyCode Fire { get => KeyCode.Mouse0; set => Fire = value; }
-
-            /// <summary>
-            /// Gets og sets the stop all actions key binding.
-            /// </summary>
-            public static KeyCode Stop { get => KeyCode.Space; set => Stop = value; }
+        /// <summary>
+        /// Returns true while the user holds down the key identified by the <see cref="Hotkey"/>.
+        /// </summary>
+        public bool GetKey(Hotkey hotkey) {
+            return Input.GetKey(essentials.keyBindings.GetKey(hotkey));
         }
 
         /// <summary>
-        /// Action bar button key bindings.
+        /// Returns true during the frame the user starts pressing down the key identified by the <see cref="Hotkey"/>.
         /// </summary>
-        public class ActionBarButtons {
-            /// <summary>
-            /// Gets or sets the action bar slot 1 key binding.
-            /// </summary>
-            public static KeyCode ActionBarSlot1 { get => KeyCode.Q; set => ActionBarSlot1 = value; }
-
-            /// <summary>
-            /// Gets or set the action bar slot 2 key binding.
-            /// </summary>
-            public static KeyCode ActionBarSlot2 { get => KeyCode.W; set => ActionBarSlot2 = value; }
-
-            /// <summary>
-            /// Gets or set the action bar slot 3 key binding.
-            /// </summary>
-            public static KeyCode ActionBarSlot3 { get => KeyCode.E; set => ActionBarSlot3 = value; }
-
-            /// <summary>
-            /// Gets or sets the action bar slot 4 key binding.
-            /// </summary>
-            public static KeyCode ActionBarSlot4 { get => KeyCode.R; set => ActionBarSlot4 = value; }
-
-            /// <summary>
-            /// Gets or sets the action bar slot 5 key binding.
-            /// </summary>
-            public static KeyCode ActionBarSlot5 { get => KeyCode.D; set => ActionBarSlot5 = value; }
-
-            /// <summary>
-            /// Gets or sets the action bar slot 6 key binding.
-            /// </summary>
-            public static KeyCode ActionBarSlot6 { get => KeyCode.F; set => ActionBarSlot6 = value; }
+        public bool GetKeyDown(Hotkey hotkey) {
+            return Input.GetKeyDown(essentials.keyBindings.GetKey(hotkey));
         }
+
+        #region Validation
+        private void OnValidate() => Validate();
 
         /// <summary>
-        /// Camera input key bindings.
+        /// Validate the code in the editor at compile time.
         /// </summary>
-        public static class Camera {
-            /// <summary>
-            /// Gets or sets the move right key binding.
-            /// </summary>
-            public static KeyCode MoveRight { get => KeyCode.RightArrow; set => MoveRight = value; }
+        private void Validate() {
+            // Components
 
-            /// <summary>
-            /// Gets or sets the move right left binding.
-            /// </summary>
-            public static KeyCode MoveLeft { get => KeyCode.LeftArrow; set => MoveLeft = value; }
-
-            /// <summary>
-            /// Gets or sets the move up key binding.
-            /// </summary>
-            public static KeyCode MoveUp { get => KeyCode.UpArrow; set => MoveUp = value; }
-
-            /// <summary>
-            /// Gets or sets the move down key binding.
-            /// </summary>
-            public static KeyCode MoveDown { get => KeyCode.DownArrow; set => MoveDown = value; }
+            // References
+            Assert.IsNotNull(essentials.keyBindings, AssertErrorMessage.NotNull<KeyBindings>(nameof(essentials.keyBindings), gameObject));
         }
+        #endregion
     }
 }

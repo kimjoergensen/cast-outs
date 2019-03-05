@@ -33,17 +33,14 @@ namespace CastOuts.Controls {
         #endregion
 
         #region Class variables
-        private PropertyInfo[] _hotkeyProperties;
+
         #endregion
 
         private void Start() {
-            // Get a list of all hotkeys and action bar buttons.
-            _hotkeyProperties = typeof(InputManager.ActionBarButtons).GetProperties();
-
-            // Assign a hotkey to the buttons
-            // and subscribe the OnButtonClicked method.
-            foreach (var button in essentials.actionBarButtons)
+            // Subscribe the OnButtonClicked method to each button.
+            foreach (var button in essentials.actionBarButtons) {
                 button.EventHandler += OnButtonClicked;
+            }
         }
 
         /// <summary>

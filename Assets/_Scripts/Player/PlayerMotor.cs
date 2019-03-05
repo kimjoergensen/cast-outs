@@ -48,7 +48,7 @@ namespace CastOuts.Player {
 
         private void Update() {
             // Check if the player has a pending spell to cast and is pressing the FIRE spell input.
-            if (_pendingSpell != null && Input.GetKeyDown(InputManager.Player.Fire))
+            if (_pendingSpell != null && InputManager.Instance.GetKeyDown(Hotkey.PlayerFire))
                 ShootSpell();
         }
 
@@ -106,7 +106,7 @@ namespace CastOuts.Player {
         /// <param name="info">The information.</param>
         public void OnNext(ActionBarButtonInfo info) {
             // Do nothing if no spell was passed.
-            if (info.Spell != null) return;
+            if (info.Spell == null) return;
 
             // Set pending spell to the spell passed in info.
             _pendingSpell = info.Spell;

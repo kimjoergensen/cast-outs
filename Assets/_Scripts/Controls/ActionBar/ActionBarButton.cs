@@ -15,7 +15,7 @@ namespace CastOuts.Controls {
 
     [Serializable]
     public class ActionBarButtonSettings {
-
+        public Hotkey KeyBinding;
     }
 
     /// <summary>
@@ -93,7 +93,6 @@ namespace CastOuts.Controls {
             Assert.IsNotNull(GetComponentInParent<ActionBarButton>(), AssertErrorMessage.ChildOf<ActionBar>(gameObject.name));
 
             // References
-
         }
         #endregion
     }

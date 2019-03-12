@@ -1,4 +1,5 @@
 using CastOuts.Shared.Utility;
+using CastOuts.VariableReferences;
 using System;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -6,8 +7,8 @@ using UnityEngine.Assertions;
 namespace CastOuts.Camera {
     [Serializable]
     public class CameraMovementEssentials {
-        [Tooltip("Set the camera offset. Use camera's own offset if no offset should be applied.")]
-        public Transform offset;
+        [Tooltip("Set the camera offset.")]
+        public Vector3Reference offset;
     }
 
     [Serializable]

@@ -911,7 +911,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   essentials:
-    offset: {fileID: 313954899}
+    offset:
+      UseConstant: 0
+      ConstantValue: {x: 0.29, y: 0, z: 0}
+      Variable: {fileID: 0}
   settings:
     speed: 20
     boundary: 20

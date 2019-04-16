@@ -914,7 +914,7 @@ MonoBehaviour:
     offset:
       UseConstant: 0
       ConstantValue: {x: 0.29, y: 0, z: 0}
-      Variable: {fileID: 0}
+      Variable: {fileID: 11400000, guid: 4bfb3c45e5a1c26479608677fcb002ea, type: 2}
   settings:
     speed: 20
     boundary: 20

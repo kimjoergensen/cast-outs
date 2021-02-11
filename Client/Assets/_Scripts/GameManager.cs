@@ -33,7 +33,7 @@ namespace CastOuts {
         private GameManager() { }
 
         private void Awake() {
-            InitGame();
+          InitGame();
         }
 
         /// <summary>Initializes the game.</summary>

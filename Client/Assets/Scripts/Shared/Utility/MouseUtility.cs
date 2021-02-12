@@ -2,10 +2,13 @@ using UnityEngine;
 
 namespace CastOuts.Shared.Utility
 {
+  /// <summary>
+  /// Utility class for mouse functionality.
+  /// </summary>
   public static class MouseUtility
   {
     /// <summary>
-    /// Tries to get the currnet mouse position in world space.
+    /// Tries to get the current mouse position in world space.
     /// </summary>
     /// <param name="position">The position.</param>
     /// <param name="shouldHaveTransform">if set to <c>true</c> [should have transform].</param>
@@ -33,10 +36,7 @@ namespace CastOuts.Shared.Utility
 
         if (!Physics.Raycast(UnityEngine.Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 1000, bitMask)) return false;
       }
-      else
-      {
-        if (!Physics.Raycast(UnityEngine.Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 1000)) return false;
-      }
+      else if (!Physics.Raycast(UnityEngine.Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 1000)) return false;
 
       // Return false if the object hit by the raycast should have a transform, but does not.
       if (shouldHaveTransform && !hit.transform) return false;

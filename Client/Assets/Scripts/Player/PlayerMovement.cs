@@ -1,6 +1,8 @@
 using System;
+using CastOuts.Shared.DataTransferObjects;
 using CastOuts.Shared.Utility;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Assertions;
 
 namespace CastOuts.Player
@@ -8,92 +10,94 @@ namespace CastOuts.Player
   [Serializable]
   public class PlayerMovementEssentials
   {
-
+    [Tooltip("Set which layer is walkable by player objects.")]
+    public LayerMask mask;
   }
 
   [Serializable]
   public class PlayerMovementSettings
   {
     [Tooltip("Determines how fast the player moves.")]
-    public float speed;
+    public float movementSpeed;
+    [Tooltip("Set the rotational speed of the player, when they are moving or casting a spell.")]
+    public float rotationSpeed;
   }
 
-  /// <summary>
-  /// Controls the player's movement.
-  /// </summary>
+  [RequireComponent(typeof(NavMeshAgent))]
   public class PlayerMovement : MonoBehaviour
   {
-    #region Inspector menues
     [Tooltip("Essential components for the PlayerMovement script.")]
     public PlayerMovementEssentials essentials;
     [Tooltip("Settings for the PlayerMovement behavior.")]
     public PlayerMovementSettings settings;
-    #endregion
 
-    #region Class variables
-    private Vector3 _targetPosition;
+    public bool StopAction { get; set; }
+    private NavMeshAgent _agent;
+    private Vector3 _desiredMovement;
+    private Quaternion _desiredRotation;
     private bool _isMoving;
-    #endregion
+    private bool _isRotating;
 
-    private void Update()
+    private void Start()
     {
-      // Check if the player has pressed the MOVE input key.
-      if (InputManager.Instance.GetKeyDown(Keybinding.PlayerMove))
-        // Set the targeted position the player wants to move the player to.
-        SetTargetPosition();
+      _agent = GetComponent<NavMeshAgent>();
+      _agent.speed = settings.movementSpeed;
     }
 
     private void FixedUpdate()
     {
       if (_isMoving)
-        PlayerActionMove();
+        Move();
+
+      if (_isRotating)
+        Rotate();
     }
 
     /// <summary>
-    /// Sets the target position.
+    /// Move the player towards a point in world space.
     /// </summary>
-    private void SetTargetPosition()
+    /// <param name="point">Vector3 holding the X, Y, Z coordinates of the point in world space.</param>
+    public void MoveTowards(Vector3 point)
     {
-      // Check if the current position of the mouse hits a walkable area.
-      // Store the position hit in a variable.
-      if (!MouseUtility.TryGetPosition(out var position, true, LayerMask.NameToLayer("Walkable"))) return;
-
-      // Set the target position to the point in space where the player clicked.
-      _targetPosition = position;
-
-      // Set is moving to true, to tell the fixed update method, the player is still moving.
+      _desiredMovement = point;
       _isMoving = true;
     }
 
-    /// <summary>
-    /// Moves the player towards target destination.
-    /// </summary>
-    private void PlayerActionMove()
+    private void Move()
     {
-      // Turn the player towards the target position and start moving the player to the location.
-      transform.LookAt(_targetPosition);
-      transform.position = Vector3.MoveTowards(transform.position, _targetPosition, settings.speed * Time.deltaTime);
+      Debug.DrawLine(transform.position, _desiredMovement, Color.red);
 
-      // Stop the player when they reach the target position.
-      if (transform.position == _targetPosition)
+      _agent.SetDestination(_desiredMovement);
+
+      if (transform.position == _desiredMovement)
         _isMoving = false;
-
-      Debug.DrawLine(transform.position, _targetPosition, Color.red);
     }
 
-    #region Validation
-    private void OnValidate() => Validate();
-
     /// <summary>
-    /// Validates this instance.
+    /// Rotate the player towards a point in world space.
     /// </summary>
+    /// <param name="point">Vector3 holding the X, Y, Z coordinates of the point in world space.</param>
+    public void LookAt(Vector3 point)
+    {
+      var direction = point - transform.position;
+      _desiredRotation = Quaternion.Euler(0, direction.y, 0);
+      _isRotating = true;
+    }
+
+    private void Rotate()
+    {
+      transform.rotation = Quaternion.RotateTowards(transform.rotation, _desiredRotation, Time.deltaTime * settings.rotationSpeed);
+
+      if (transform.rotation == _desiredRotation)
+        _isRotating = false;
+    }
+
+    private void OnValidate() => Validate();
     private void Validate()
     {
-      // Components
-
-      // References
-      Assert.IsTrue(settings.speed.GreaterThan(default), AssertErrorMessage.GreaterThan(nameof(settings.speed), default, gameObject));
+      Assert.IsTrue(settings.movementSpeed.GreaterThan(default), AssertErrorMessage.GreaterThan(nameof(settings.movementSpeed), default, gameObject));
+      Assert.IsTrue(settings.rotationSpeed.GreaterThan(default), AssertErrorMessage.GreaterThan(nameof(settings.rotationSpeed), default, gameObject));
+      Assert.AreNotEqual(essentials.mask, 0, AssertErrorMessage.NotNull<LayerMask>(nameof(essentials.mask), gameObject));
     }
-    #endregion
   }
 }

@@ -108,6 +108,9 @@ namespace CastOuts.Shared.Utility
     }
   }
 
+  /// <summary>
+  /// Utility class for assertion error messages.
+  /// </summary>
   public static class AssertErrorMessage
   {
     public static string NotEmpty(string asserted, GameObject gameObject)

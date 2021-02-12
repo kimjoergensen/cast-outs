@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using CastOuts.Controls;
 using CastOuts.Shared.DataTransferObjects;
 using CastOuts.Shared.Utility;
@@ -32,6 +33,7 @@ namespace CastOuts.Player
     private PlayerMovement _playerMovement;
     private ISpell _pendingSpell;
     private IDisposable _cancellation;
+    private Vector3 _mousePosition;
 
     private void Start()
     {
@@ -47,27 +49,24 @@ namespace CastOuts.Player
     private void Update()
     {
       // Check if the player has a pending spell to cast and is pressing the FIRE spell input.
-      if (_pendingSpell != null && InputManager.Instance.GetKeyDown(Keybinding.PlayerFire))
-        ShootSpell();
+      if (_pendingSpell != null
+      && InputManager.Instance.GetKeyDown(Keybinding.PlayerFire)
+      && MouseUtility.TryGetPosition(out _mousePosition, true))
+        StartCoroutine(ShootSpell(_mousePosition));
 
       // Check if the player is pressing the MOVE input key.
       if (InputManager.Instance.GetKey(Keybinding.PlayerMove)
-      && MouseUtility.TryGetPosition(out var position, true, LayerMask.NameToLayer("Walkable")))
-        _playerMovement.MoveTowards(position);
+      && MouseUtility.TryGetPosition(out _mousePosition, true, LayerMask.NameToLayer("Walkable")))
+        _playerMovement.MoveTowards(_mousePosition);
     }
 
-    private void ShootSpell()
+    private IEnumerator ShootSpell(Vector3 position)
     {
-      // Get the mouse position in world space to find the direction the player is casting the spell.
-      // Escape the method if no position could be found.
-      if (!MouseUtility.TryGetPosition(out var mousePosition)) return;
-
-      // Turn the player towards the desired direction.
-
-      transform.Rotate(mousePosition * (3 * Time.deltaTime));
+      // Turn the player towards the position.
+      yield return _playerMovement.LookAt(position);
 
       // Try to shoot the spell.
-      if (_pendingSpell.Shoot(essentials.spellSpawnLocation.position, mousePosition))
+      if (_pendingSpell.Shoot(essentials.spellSpawnLocation.position, position))
         // Remove the spell from the pending spell slot, when the spell is successfully shot.
         _pendingSpell = null;
     }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using CastOuts.Shared.DataTransferObjects;
 using CastOuts.Shared.Utility;
 using UnityEngine;
@@ -17,10 +18,7 @@ namespace CastOuts.Player
   [Serializable]
   public class PlayerMovementSettings
   {
-    [Tooltip("Determines how fast the player moves.")]
-    public float movementSpeed;
-    [Tooltip("Set the rotational speed of the player, when they are moving or casting a spell.")]
-    public float rotationSpeed;
+
   }
 
   [RequireComponent(typeof(NavMeshAgent))]
@@ -41,16 +39,13 @@ namespace CastOuts.Player
     private void Start()
     {
       _agent = GetComponent<NavMeshAgent>();
-      _agent.speed = settings.movementSpeed;
     }
 
     private void FixedUpdate()
     {
-      if (_isMoving)
+      if (_isMoving
+      && !_isRotating)
         Move();
-
-      if (_isRotating)
-        Rotate();
     }
 
     /// <summary>
@@ -67,6 +62,7 @@ namespace CastOuts.Player
     {
       Debug.DrawLine(transform.position, _desiredMovement, Color.red);
 
+      _agent.isStopped = false;
       _agent.SetDestination(_desiredMovement);
 
       if (transform.position == _desiredMovement)
@@ -77,26 +73,29 @@ namespace CastOuts.Player
     /// Rotate the player towards a point in world space.
     /// </summary>
     /// <param name="point">Vector3 holding the X, Y, Z coordinates of the point in world space.</param>
-    public void LookAt(Vector3 point)
+    public IEnumerator LookAt(Vector3 point)
     {
       var direction = point - transform.position;
       _desiredRotation = Quaternion.Euler(0, direction.y, 0);
       _isRotating = true;
+      yield return Rotate();
     }
 
-    private void Rotate()
+    private IEnumerator Rotate()
     {
-      transform.rotation = Quaternion.RotateTowards(transform.rotation, _desiredRotation, Time.deltaTime * settings.rotationSpeed);
+      _agent.isStopped = true;
+      while (_isRotating)
+      {
+        yield return transform.rotation = Quaternion.RotateTowards(transform.rotation, _desiredRotation, Time.deltaTime * (_agent.angularSpeed / 10));
 
-      if (transform.rotation == _desiredRotation)
-        _isRotating = false;
+        if (transform.rotation == _desiredRotation)
+          _isRotating = false;
+      }
     }
 
     private void OnValidate() => Validate();
     private void Validate()
     {
-      Assert.IsTrue(settings.movementSpeed.GreaterThan(default), AssertErrorMessage.GreaterThan(nameof(settings.movementSpeed), default, gameObject));
-      Assert.IsTrue(settings.rotationSpeed.GreaterThan(default), AssertErrorMessage.GreaterThan(nameof(settings.rotationSpeed), default, gameObject));
       Assert.AreNotEqual(essentials.mask, 0, AssertErrorMessage.NotNull<LayerMask>(nameof(essentials.mask), gameObject));
     }
   }

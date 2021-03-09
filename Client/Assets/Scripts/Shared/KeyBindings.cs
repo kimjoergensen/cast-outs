@@ -1,8 +1,8 @@
-using System;
-using UnityEngine;
-
-namespace CastOuts
+namespace CastOuts.Shared
 {
+  using System;
+  using UnityEngine;
+
   [Serializable]
   public class PlayerKeyBindings
   {
@@ -44,7 +44,7 @@ namespace CastOuts
     public KeyCode CameraMoveDown = KeyCode.DownArrow;
   }
 
-  public enum Keybinding
+  public enum KeyBinding
   {
     PlayerMove,
     PlayerFire,
@@ -64,61 +64,30 @@ namespace CastOuts
   [CreateAssetMenu(fileName = "KeyBindings", menuName = "Key bindings")]
   public class KeyBindings : ScriptableObject
   {
-    #region Inspector menues
     [Tooltip("Set the key bindings to control the player.")]
     public PlayerKeyBindings playerKeyBindings;
     [Tooltip("Set the key bindings for the action bar buttons.")]
     public ActionBarKeyBindings actionBarKeyBindings;
     [Tooltip("Set the key bindings to control the camera.")]
     public CameraKeyBindings cameraKeyBindings;
-    #endregion
 
-    public KeyCode GetKey(Keybinding keybinding)
-    {
-      switch (keybinding)
-      {
-        case Keybinding.PlayerMove:
-          return playerKeyBindings.Move;
-
-        case Keybinding.PlayerFire:
-          return playerKeyBindings.Fire;
-
-        case Keybinding.PlayerStop:
-          return playerKeyBindings.Stop;
-
-        case Keybinding.ActionBarButton1:
-          return actionBarKeyBindings.ActionBarButton1;
-
-        case Keybinding.ActionBarButton2:
-          return actionBarKeyBindings.ActionBarButton2;
-
-        case Keybinding.ActionBarButton3:
-          return actionBarKeyBindings.ActionBarButton3;
-
-        case Keybinding.ActionBarButton4:
-          return actionBarKeyBindings.ActionBarButton4;
-
-        case Keybinding.ActionBarButton5:
-          return actionBarKeyBindings.ActionBarButton5;
-
-        case Keybinding.ActionBarButton6:
-          return actionBarKeyBindings.ActionBarButton6;
-
-        case Keybinding.CameraMoveRight:
-          return cameraKeyBindings.CameraMoveRight;
-
-        case Keybinding.CameraMoveLeft:
-          return cameraKeyBindings.CamereMoveLeft;
-
-        case Keybinding.CameraMoveUp:
-          return cameraKeyBindings.CameraMoveUp;
-
-        case Keybinding.CameraMoveDown:
-          return cameraKeyBindings.CameraMoveDown;
-
-        default:
-          return KeyCode.None;
-      }
+    public KeyCode GetKey(KeyBinding keybinding) {
+      return keybinding switch {
+        KeyBinding.PlayerMove => playerKeyBindings.Move,
+        KeyBinding.PlayerFire => playerKeyBindings.Fire,
+        KeyBinding.PlayerStop => playerKeyBindings.Stop,
+        KeyBinding.ActionBarButton1 => actionBarKeyBindings.ActionBarButton1,
+        KeyBinding.ActionBarButton2 => actionBarKeyBindings.ActionBarButton2,
+        KeyBinding.ActionBarButton3 => actionBarKeyBindings.ActionBarButton3,
+        KeyBinding.ActionBarButton4 => actionBarKeyBindings.ActionBarButton4,
+        KeyBinding.ActionBarButton5 => actionBarKeyBindings.ActionBarButton5,
+        KeyBinding.ActionBarButton6 => actionBarKeyBindings.ActionBarButton6,
+        KeyBinding.CameraMoveRight => cameraKeyBindings.CameraMoveRight,
+        KeyBinding.CameraMoveLeft => cameraKeyBindings.CamereMoveLeft,
+        KeyBinding.CameraMoveUp => cameraKeyBindings.CameraMoveUp,
+        KeyBinding.CameraMoveDown => cameraKeyBindings.CameraMoveDown,
+        _ => KeyCode.None,
+      };
     }
   }
 }

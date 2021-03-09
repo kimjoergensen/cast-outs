@@ -1,9 +1,9 @@
-using UnityEngine;
-
 namespace CastOuts.Shared.Extensions
 {
+  using UnityEngine;
+
   /// <summary>
-  /// Extension methods for the <see cref="Vector3"/> class
+  /// Extension methods for Vector3.
   /// </summary>
   public static class Vector3Extensions
   {
@@ -13,9 +13,8 @@ namespace CastOuts.Shared.Extensions
     /// <param name="position">The position.</param>
     /// <param name="limits">The limits.</param>
     /// <param name="offset">The offset.</param>
-    /// <returns><paramref name="position"/> with it's X and Z axes limited by the values of <paramref name="limits"/> X and Y axes respectively.</returns>
-    public static Vector3 LimitCoordinates(this Vector3 position, Vector2 limits, Vector3? offset = null)
-    {
+    /// <returns>position with it's X and Z axes limited by the values of limits X and Y axes respectively.</returns>
+    public static Vector3 LimitCoordinates(this Vector3 position, Vector2 limits, Vector3? offset = null) {
       // Add the offset from the limits calculations.
       position += offset ?? Vector3.zero;
 

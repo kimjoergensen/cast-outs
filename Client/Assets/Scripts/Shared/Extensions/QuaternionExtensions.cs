@@ -1,9 +1,9 @@
-using UnityEngine;
-
 namespace CastOuts.Shared.Extensions
 {
+  using UnityEngine;
+
   /// <summary>
-  /// Extension class for Quaternions.
+  /// Extension methods for Quaternions.
   /// </summary>
   public static class QuaternionExtensions
   {
@@ -13,8 +13,8 @@ namespace CastOuts.Shared.Extensions
     /// <param name="rotation">The Quaternion object being checked.</param>
     /// <param name="targetRotation">The desired rotation of the Quaternion being checked.</param>
     /// <param name="range">The acceptable range in degrees.</param>
-    public static bool Approximately(this Quaternion rotation, Quaternion targetRotation, float range)
-    {
+    /// <returns>True if the degrees between the rotation and targetRotation are within the range.</return>
+    public static bool Approximately(this Quaternion rotation, Quaternion targetRotation, float range) {
       return 1 - Mathf.Abs(Quaternion.Dot(rotation, targetRotation)) < range / 360f;
     }
   }

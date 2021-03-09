@@ -1,8 +1,8 @@
-using System;
-using UnityEngine;
-
 namespace CastOuts.VariableReferences
 {
+  using System;
+  using UnityEngine;
+
   [Serializable]
   public class Vector3Reference
   {
@@ -10,16 +10,13 @@ namespace CastOuts.VariableReferences
     public Vector3 ConstantValue;
     public Vector3Variable Variable;
 
-    public Vector3 Value
-    {
-      get
-      {
+    public Vector3 Value {
+      get {
         return UseConstant
             ? ConstantValue
             : Variable.Value;
       }
-      set
-      {
+      set {
         if (UseConstant)
           ConstantValue = value;
         else

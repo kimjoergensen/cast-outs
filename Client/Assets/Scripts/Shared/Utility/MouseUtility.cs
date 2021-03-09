@@ -1,7 +1,7 @@
-using UnityEngine;
-
 namespace CastOuts.Shared.Utility
 {
+  using UnityEngine;
+
   /// <summary>
   /// Utility class for mouse functionality.
   /// </summary>
@@ -22,21 +22,18 @@ namespace CastOuts.Shared.Utility
     /// }
     /// </code>
     /// </example>
-    public static bool TryGetPosition(out Vector3 position, bool shouldHaveTransform = true, LayerMask? layerMask = null)
-    {
+    public static bool TryGetPosition(out Vector3 position, bool shouldHaveTransform = true, LayerMask? layerMask = null) {
       // Set default value for position in case the methods returns false.
       position = new Vector3();
 
       // Return false if the raycast cast from the camera to the mouse position did not hit a valid object.
       RaycastHit hit;
-      if (layerMask != null)
-      {
+      if (layerMask != null) {
         // Get the bit mask from the passer layer mask.
         int bitMask = 1 << (int)layerMask;
 
         if (!Physics.Raycast(UnityEngine.Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 1000, bitMask)) return false;
-      }
-      else if (!Physics.Raycast(UnityEngine.Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 1000)) return false;
+      } else if (!Physics.Raycast(UnityEngine.Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 1000)) return false;
 
       // Return false if the object hit by the raycast should have a transform, but does not.
       if (shouldHaveTransform && !hit.transform) return false;

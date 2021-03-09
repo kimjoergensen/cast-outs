@@ -1,16 +1,19 @@
-using System.Collections;
-using UnityEngine;
-
 namespace CastOuts.Spells.Interfaces
 {
-  /// <summary>Interface for all spells. This makes sure all spells always have the minimum required properties and methods.</summary>
+  using System.Collections;
+  using UnityEngine;
+
+  /// <summary>
+  /// Interface for all spells. This makes sure all spells always have the minimum required methods.
+  /// </summary>
   public interface ISpell
   {
-    string Name { get; set; }
-    float Damage { get; set; }
-    float Speed { get; set; }
-    float Range { get; set; }
-    Sprite Image { get; set; }
+    public string Name { get; }
+    public Sprite Image { get; }
+    public float Damage { get; set; }
+    public float Force { get; set; }
+    public float Speed { get; set; }
+    public float Range { get; set; }
 
     IEnumerator DestroyOnMaxDistance(float range);
     IEnumerator DestroyAfterDelay(float time);

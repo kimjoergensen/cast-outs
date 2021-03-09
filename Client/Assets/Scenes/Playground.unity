@@ -136,11 +136,11 @@ GameObject:
   - component: {fileID: 91048064}
   - component: {fileID: 91048063}
   - component: {fileID: 91048062}
-  - component: {fileID: 91048065}
   - component: {fileID: 91048066}
+  - component: {fileID: 91048065}
   m_Layer: 9
   m_Name: Opponent (1)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -208,7 +208,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &91048065
+--- !u!54 &91048065
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 91048061}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 1
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 84
+  m_CollisionDetection: 0
+--- !u!136 &91048066
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -221,23 +237,7 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &91048066
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 91048061}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,7 +417,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: D
+  m_Text: 
 --- !u!222 &239752338
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -435,10 +435,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 240468800}
-  - component: {fileID: 240468801}
   - component: {fileID: 240468804}
   - component: {fileID: 240468802}
   - component: {fileID: 240468803}
+  - component: {fileID: 240468801}
   m_Layer: 5
   m_Name: Button Slot1
   m_TagString: Untagged
@@ -479,9 +479,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccebb6389da07d741864a7bc31cf9227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings:
-    KeyBinding: 3
-  spell: {fileID: 5744993330398661662, guid: 01431017f838649409ab130e6b8a02d4, type: 3}
+  _settings:
+    keyBinding: 3
+  _spell: {fileID: 5744993330398661662, guid: 01431017f838649409ab130e6b8a02d4, type: 3}
 --- !u!114 &240468802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -573,10 +573,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 263751855}
-  - component: {fileID: 263751856}
   - component: {fileID: 263751859}
   - component: {fileID: 263751857}
   - component: {fileID: 263751858}
+  - component: {fileID: 263751856}
   m_Layer: 5
   m_Name: Button Slot4
   m_TagString: Untagged
@@ -617,9 +617,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccebb6389da07d741864a7bc31cf9227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings:
-    KeyBinding: 6
-  spell: {fileID: 0}
+  _settings:
+    keyBinding: 6
+  _spell: {fileID: 0}
 --- !u!114 &263751857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -702,36 +702,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &313954898
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 313954899}
-  m_Layer: 0
-  m_Name: Offset
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &313954899
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 313954898}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -23, z: 20}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 534669905}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &380084918
 GameObject:
   m_ObjectHideFlags: 0
@@ -1014,16 +984,16 @@ Camera:
   m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
+  m_FocalLength: 15.92454
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.03
   far clip plane: 1000
-  field of view: 45
+  field of view: 64
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -1048,14 +1018,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_LocalRotation: {x: 0.44619772, y: 0, z: 0, w: 0.89493436}
-  m_LocalPosition: {x: 0, y: 23, z: -22}
+  m_LocalRotation: {x: 0.5735764, y: 0, z: 0, w: 0.8191521}
+  m_LocalPosition: {x: 0, y: 30, z: -13.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 313954899}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 53, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 70, y: 0, z: 0}
 --- !u!114 &534669906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1068,15 +1037,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8576481e004dc4788b39ccfd886c5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  essentials:
-    offset:
-      UseConstant: 0
-      ConstantValue: {x: 0.29, y: 0, z: 0}
-      Variable: {fileID: 11400000, guid: 4bfb3c45e5a1c26479608677fcb002ea, type: 2}
-  settings:
-    speed: 20
-    boundary: 20
-    limits: {x: 10, y: 10}
+  _settings:
+    speed: 25
+    boundary: 25
+    limits: {x: 30, y: 30}
 --- !u!1 &603917756
 GameObject:
   m_ObjectHideFlags: 0
@@ -1163,7 +1127,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: F
+  m_Text: 
 --- !u!222 &603917760
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1184,9 +1148,9 @@ GameObject:
   - component: {fileID: 811112773}
   - component: {fileID: 811112772}
   - component: {fileID: 811112771}
-  m_Layer: 12
+  m_Layer: 10
   m_Name: Ground
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -1429,7 +1393,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Q
+  m_Text: 
 --- !u!222 &852933790
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1449,7 +1413,6 @@ GameObject:
   - component: {fileID: 908640998}
   - component: {fileID: 908641001}
   - component: {fileID: 908641000}
-  - component: {fileID: 908640999}
   m_Layer: 9
   m_Name: VFX
   m_TagString: Untagged
@@ -1465,25 +1428,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 908640997}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.98, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 1184958534}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &908640999
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 908640997}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &908641000
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1649,7 +1599,7 @@ GameObject:
   - component: {fileID: 1184958536}
   m_Layer: 9
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1666,10 +1616,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 335afecb30a993246b65ea665108e1e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  essentials:
-    mask:
+  _essentials:
+    walkableMask:
       serializedVersion: 2
       m_Bits: 1024
+  _settings:
+    RotationDamping: 3.5
 --- !u!4 &1184958534
 Transform:
   m_ObjectHideFlags: 0
@@ -1695,12 +1647,12 @@ Rigidbody:
   m_GameObject: {fileID: 1184958532}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 1
   m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 80
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!114 &1184958536
 MonoBehaviour:
@@ -1714,7 +1666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57ec6c3a324e74c43b47e269d4c9b220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  essentials:
+  _essentials:
     spellSpawnLocation: {fileID: 1500333362}
 --- !u!136 &1184958537
 CapsuleCollider:
@@ -1827,10 +1779,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1475064668}
-  - component: {fileID: 1475064669}
   - component: {fileID: 1475064672}
   - component: {fileID: 1475064670}
   - component: {fileID: 1475064671}
+  - component: {fileID: 1475064669}
   m_Layer: 5
   m_Name: Button Slot6
   m_TagString: Untagged
@@ -1871,9 +1823,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccebb6389da07d741864a7bc31cf9227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings:
-    KeyBinding: 8
-  spell: {fileID: 0}
+  _settings:
+    keyBinding: 8
+  _spell: {fileID: 0}
 --- !u!114 &1475064670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2220,10 +2172,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1695819732}
-  - component: {fileID: 1695819733}
   - component: {fileID: 1695819736}
   - component: {fileID: 1695819734}
   - component: {fileID: 1695819735}
+  - component: {fileID: 1695819733}
   m_Layer: 5
   m_Name: Button Slot2
   m_TagString: Untagged
@@ -2264,9 +2216,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccebb6389da07d741864a7bc31cf9227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings:
-    KeyBinding: 4
-  spell: {fileID: 0}
+  _settings:
+    keyBinding: 4
+  _spell: {fileID: 0}
 --- !u!114 &1695819734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2435,7 +2387,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: E
+  m_Text: 
 --- !u!222 &1759290504
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2453,10 +2405,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1764329371}
-  - component: {fileID: 1764329372}
   - component: {fileID: 1764329375}
   - component: {fileID: 1764329373}
   - component: {fileID: 1764329374}
+  - component: {fileID: 1764329372}
   m_Layer: 5
   m_Name: Button Slot3
   m_TagString: Untagged
@@ -2497,9 +2449,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccebb6389da07d741864a7bc31cf9227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings:
-    KeyBinding: 5
-  spell: {fileID: 0}
+  _settings:
+    keyBinding: 5
+  _spell: {fileID: 0}
 --- !u!114 &1764329373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2668,7 +2620,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: R
+  m_Text: 
 --- !u!222 &1795341346
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2771,7 +2723,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfd28705b821ca04888fd5606d0e1e94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  essentials:
+  _essentials:
     actionBarButtons:
     - {fileID: 240468801}
     - {fileID: 1695819733}
@@ -2788,10 +2740,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1943621774}
-  - component: {fileID: 1943621775}
   - component: {fileID: 1943621778}
   - component: {fileID: 1943621776}
   - component: {fileID: 1943621777}
+  - component: {fileID: 1943621775}
   m_Layer: 5
   m_Name: Button Slot5
   m_TagString: Untagged
@@ -2832,9 +2784,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccebb6389da07d741864a7bc31cf9227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings:
-    KeyBinding: 7
-  spell: {fileID: 0}
+  _settings:
+    keyBinding: 7
+  _spell: {fileID: 0}
 --- !u!114 &1943621776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3003,7 +2955,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: W
+  m_Text: 
 --- !u!222 &2026869672
 CanvasRenderer:
   m_ObjectHideFlags: 0

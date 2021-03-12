@@ -1,4 +1,4 @@
-namespace CastOuts.Shared.Utility
+namespace Assets.Scripts.Shared.Utility
 {
   using UnityEngine;
 

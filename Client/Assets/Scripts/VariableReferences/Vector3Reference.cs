@@ -1,4 +1,4 @@
-namespace CastOuts.VariableReferences
+namespace Assets.Scripts.VariableReferences
 {
   using System;
   using UnityEngine;
@@ -25,7 +25,7 @@ namespace CastOuts.VariableReferences
     }
   }
 
-  [CreateAssetMenu]
+  [CreateAssetMenu(fileName = "Vector3Variable", menuName = "Variables/Vector3")]
   public class Vector3Variable : ScriptableObject
   {
     public Vector3 Value;

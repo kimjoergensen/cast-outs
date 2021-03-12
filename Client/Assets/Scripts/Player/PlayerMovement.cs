@@ -1,7 +1,6 @@
-namespace CastOuts.Player
+namespace Assets.Scripts.Player
 {
-  using CastOuts.Shared.Extensions;
-  using System;
+  using Assets.Scripts.Shared.Extensions;
   using System.Collections;
   using UnityEngine;
   using UnityEngine.AI;
@@ -9,25 +8,9 @@ namespace CastOuts.Player
   [RequireComponent(typeof(NavMeshAgent))]
   public class PlayerMovement : MonoBehaviour
   {
-    [Serializable]
-    protected class Essentials
-    {
-      [Tooltip("Set which layer is walkable by player objects.")]
-      public LayerMask walkableMask;
-    }
-
-    [Serializable]
-    protected class Settings
-    {
-      [Tooltip("Set the rotational speed of the player.")]
-      [Range(0, 5)]
-      public float RotationDamping;
-    }
-
-    [SerializeField]
-    private Essentials _essentials;
-    [SerializeField]
-    private Settings _settings;
+    [Tooltip("Set the rotational speed of the player.")]
+    [Range(0, 5)]
+    public float RotationDamping;
 
     private NavMeshAgent _agent;
     private Vector3 _desiredMovement;
@@ -87,10 +70,10 @@ namespace CastOuts.Player
     private IEnumerator Rotate() {
       _agent.isStopped = true;
       while (_isRotating) {
-        yield return transform.rotation = Quaternion.RotateTowards(transform.rotation, _desiredRotation, Time.deltaTime * (_agent.angularSpeed / _settings.RotationDamping));
+        yield return transform.rotation = Quaternion.RotateTowards(transform.rotation, _desiredRotation, Time.deltaTime * (_agent.angularSpeed / RotationDamping));
 
-        // Stop rotating when the rotation is within 1 degree angle of the desired rotation.
-        if (transform.rotation.Approximately(_desiredRotation, 1f))
+        // Stop rotating when the rotation is approximately within the desired rotation.
+        if (transform.rotation.Approximately(_desiredRotation, 5f))
           _isRotating = false;
       }
     }

@@ -1,4 +1,4 @@
-namespace CastOuts.Shared
+namespace Assets.Scripts.Shared
 {
   using System;
   using System.Collections.Generic;

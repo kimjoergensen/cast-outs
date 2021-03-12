@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1566258906168124137}
   - component: {fileID: 5636886690326390878}
-  - component: {fileID: 4552328352185691747}
+  - component: {fileID: 653364763050171089}
   - component: {fileID: 1208524284201003829}
-  - component: {fileID: 5744993330398661662}
   - component: {fileID: 1208524284201003818}
+  - component: {fileID: -605044206419261070}
   m_Layer: 0
   m_Name: Fireball
   m_TagString: Untagged
@@ -56,7 +56,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 4
   m_CollisionDetection: 0
---- !u!135 &4552328352185691747
+--- !u!135 &653364763050171089
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -67,7 +67,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.32
+  m_Radius: 0.35
   m_Center: {x: 0, y: 0, z: -0.1}
 --- !u!198 &1208524284201003829
 ParticleSystem:
@@ -3649,7 +3649,7 @@ ParticleSystem:
   CollisionModule:
     enabled: 0
     serializedVersion: 4
-    type: 0
+    type: 1
     collisionMode: 0
     colliderForce: 0
     multiplyColliderForceByParticleSize: 0
@@ -3826,11 +3826,11 @@ ParticleSystem:
     radiusScale: 1
     collidesWith:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 512
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
-    collisionMessages: 0
+    collisionMessages: 1
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
@@ -4787,25 +4787,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!114 &5744993330398661662
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1208524284201003819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72880f7151bd0e04fa782020f8fa8336, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _essentials:
-    name: Fireball
-    image: {fileID: 21300000, guid: 50bb1f0738ac6554db59e8131edd842b, type: 3}
-    damage: 20
-    force: 550
-    speed: 700
-    range: 15
 --- !u!199 &1208524284201003818
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -4872,3 +4853,23 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &-605044206419261070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208524284201003819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72880f7151bd0e04fa782020f8fa8336, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Fireball
+  image: {fileID: 21300000, guid: 50bb1f0738ac6554db59e8131edd842b, type: 3}
+  type: {fileID: 11400000, guid: aed7b49f5c852604a8100ca085e88daf, type: 2}
+  behaviors:
+  - {fileID: 11400000, guid: d2149baeb01a41840910609d7c4fe742, type: 2}
+  effects:
+  - {fileID: 11400000, guid: 21453858f282a8747a127d1be9c05c75, type: 2}
+  - {fileID: 11400000, guid: 634b2314afd2e224380d4ec2781e077c, type: 2}

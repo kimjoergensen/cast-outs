@@ -1,10 +1,9 @@
-namespace CastOuts.Player
+namespace Assets.Scripts.Player
 {
-  using CastOuts.ActionBar;
-  using CastOuts.Shared;
-  using CastOuts.Shared.DataTransferObjects;
-  using CastOuts.Shared.Utility;
-  using CastOuts.Spells.Interfaces;
+  using Assets.Scripts.ActionBar;
+  using Assets.Scripts.Shared.KeyBinding;
+  using Assets.Scripts.Shared.Utility;
+  using Assets.Scripts.Spells.Bases;
   using System;
   using System.Collections;
   using UnityEngine;
@@ -12,26 +11,11 @@ namespace CastOuts.Player
   [RequireComponent(typeof(PlayerMovement))]
   public class PlayerController : MonoBehaviour, IObserver<ActionBarButtonInfo>
   {
-    [Serializable]
-    protected class Essentials
-    {
-      [Tooltip("Set the spawn location of all spells cast by the player.")]
-      public Transform spellSpawnLocation;
-    }
-
-    [Serializable]
-    protected class Settings
-    {
-
-    }
-
-    [SerializeField]
-    private Essentials _essentials;
-    [SerializeField]
-    private Settings _settings;
+    [Tooltip("Set the spawn location of all spells cast by the player.")]
+    public Transform spellSpawnLocation;
 
     private PlayerMovement _playerMovement;
-    private ISpell _pendingSpell;
+    private Spell _pendingSpell;
     private IDisposable _cancellation;
     private Vector3 _mousePosition;
 
@@ -57,16 +41,14 @@ namespace CastOuts.Player
         _playerMovement.MoveTowards(_mousePosition);
     }
 
-    private IEnumerator ShootSpell(Vector3 position) {
-      // Turn the player towards the position.
-      yield return _playerMovement.LookAt(position);
-
-      // Check for race condition when the spell has been shot,
-      // but the enumeration still yields next to _playerMovement.LookAt(position).
+    private IEnumerator ShootSpell(Vector3 target) {
       if (_pendingSpell is null) yield break;
 
-      // Shoot the spell in the direction of the position.
-      _pendingSpell.Shoot(_essentials.spellSpawnLocation.position, position);
+      // Turn the player towards the target.
+      yield return _playerMovement.LookAt(target);
+
+      // Shoot the spell in the direction of the target.
+      _pendingSpell.Activate(target);
 
       // Remove the spell from the pending spell slot.
       _pendingSpell = null;

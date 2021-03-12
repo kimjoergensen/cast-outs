@@ -8,8 +8,7 @@ using UnityEngine;
 /// </summary>
 public class AddNameSpace : UnityEditor.AssetModificationProcessor
 {
-  public static void OnWillCreateAsset(string path)
-  {
+  public static void OnWillCreateAsset(string path) {
     path = path.Replace(".meta", "");
     int index = path.LastIndexOf(".");
     if (index < 0) return;
@@ -21,7 +20,7 @@ public class AddNameSpace : UnityEditor.AssetModificationProcessor
 
     string lastPart = path.Substring(path.IndexOf("Scripts"));
     string _namespace = lastPart.Substring(0, lastPart.LastIndexOf('/'));
-    _namespace = _namespace.Replace('/', '.').Replace("Scripts", "CastOuts");
+    _namespace = _namespace.Replace('/', '.').Replace("Scripts", "Assets.Scripts");
     file = file.Replace("#NAMESPACE#", _namespace);
 
     System.IO.File.WriteAllText(path, file);

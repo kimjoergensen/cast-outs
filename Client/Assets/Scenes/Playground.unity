@@ -232,12 +232,12 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 91048061}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,9 +479,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccebb6389da07d741864a7bc31cf9227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _settings:
-    keyBinding: 3
-  _spell: {fileID: 5744993330398661662, guid: 01431017f838649409ab130e6b8a02d4, type: 3}
+  keyBinding: 3
+  _spell: {fileID: -605044206419261070, guid: 01431017f838649409ab130e6b8a02d4, type: 3}
 --- !u!114 &240468802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -617,8 +616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccebb6389da07d741864a7bc31cf9227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _settings:
-    keyBinding: 6
+  keyBinding: 6
   _spell: {fileID: 0}
 --- !u!114 &263751857
 MonoBehaviour:
@@ -913,8 +911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaf6ff64210cf8442919983f1bb8397c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  essentials:
-    keyBindings: {fileID: 11400000, guid: 692ad23aaf25f4740a3e9da9d9e137bc, type: 2}
+  keyBindings: {fileID: 11400000, guid: 692ad23aaf25f4740a3e9da9d9e137bc, type: 2}
 --- !u!114 &515641538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1037,10 +1034,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8576481e004dc4788b39ccfd886c5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _settings:
-    speed: 25
-    boundary: 25
-    limits: {x: 30, y: 30}
+  speed: 20
+  boundary: 20
+  limits: {x: 20, y: 20}
 --- !u!1 &603917756
 GameObject:
   m_ObjectHideFlags: 0
@@ -1616,12 +1612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 335afecb30a993246b65ea665108e1e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _essentials:
-    walkableMask:
-      serializedVersion: 2
-      m_Bits: 1024
-  _settings:
-    RotationDamping: 3.5
+  RotationDamping: 3.5
 --- !u!4 &1184958534
 Transform:
   m_ObjectHideFlags: 0
@@ -1666,8 +1657,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57ec6c3a324e74c43b47e269d4c9b220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _essentials:
-    spellSpawnLocation: {fileID: 1500333362}
+  spellSpawnLocation: {fileID: 1500333362}
 --- !u!136 &1184958537
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1714,7 +1704,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1230161812}
   - component: {fileID: 1230161811}
-  - component: {fileID: 1230161810}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1722,25 +1711,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1230161810
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1230161809}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
 --- !u!114 &1230161811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1823,8 +1793,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccebb6389da07d741864a7bc31cf9227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _settings:
-    keyBinding: 8
+  keyBinding: 8
   _spell: {fileID: 0}
 --- !u!114 &1475064670
 MonoBehaviour:
@@ -2216,8 +2185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccebb6389da07d741864a7bc31cf9227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _settings:
-    keyBinding: 4
+  keyBinding: 4
   _spell: {fileID: 0}
 --- !u!114 &1695819734
 MonoBehaviour:
@@ -2449,8 +2417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccebb6389da07d741864a7bc31cf9227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _settings:
-    keyBinding: 5
+  keyBinding: 5
   _spell: {fileID: 0}
 --- !u!114 &1764329373
 MonoBehaviour:
@@ -2723,14 +2690,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfd28705b821ca04888fd5606d0e1e94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _essentials:
-    actionBarButtons:
-    - {fileID: 240468801}
-    - {fileID: 1695819733}
-    - {fileID: 1764329372}
-    - {fileID: 263751856}
-    - {fileID: 1943621775}
-    - {fileID: 1475064669}
+  actionBarButtons:
+  - {fileID: 240468801}
+  - {fileID: 1695819733}
+  - {fileID: 1764329372}
+  - {fileID: 263751856}
+  - {fileID: 1943621775}
+  - {fileID: 1475064669}
 --- !u!1 &1943621773
 GameObject:
   m_ObjectHideFlags: 0
@@ -2784,8 +2750,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccebb6389da07d741864a7bc31cf9227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _settings:
-    keyBinding: 7
+  keyBinding: 7
   _spell: {fileID: 0}
 --- !u!114 &1943621776
 MonoBehaviour:

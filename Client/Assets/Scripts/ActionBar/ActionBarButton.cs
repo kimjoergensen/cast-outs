@@ -1,8 +1,7 @@
-namespace CastOuts.ActionBar
+namespace Assets.Scripts.ActionBar
 {
-  using CastOuts.Shared;
-  using CastOuts.Spells;
-  using CastOuts.Spells.Interfaces;
+  using Assets.Scripts.Shared.KeyBinding;
+  using Assets.Scripts.Spells.Bases;
   using System;
   using UnityEngine;
   using UnityEngine.Events;
@@ -16,29 +15,14 @@ namespace CastOuts.ActionBar
   [RequireComponent(typeof(Text))]
   public class ActionBarButton : MonoBehaviour
   {
-    [Serializable]
-    protected class Essentials
-    {
+    [Tooltip("Set which key binding is mapped to the action bar button.")]
+    public KeyBinding keyBinding;
 
-    }
-
-    [Serializable]
-    protected class Settings
-    {
-      [Tooltip("Set which key binding is mapped to the action bar button.")]
-      public KeyBinding keyBinding;
-    }
-
-    [SerializeField]
-    private Essentials _essentials;
-    [SerializeField]
-    private Settings _settings;
-
-    private UnityAction<ISpell> _eventHandler;
+    private UnityAction<Spell> _eventHandler;
     private Button _button;
     private Image _image;
     private Text _text;
-    public SpellBase _spell;
+    public Spell _spell;
 
     private void Awake() {
       _button = GetComponent<Button>();
@@ -48,12 +32,12 @@ namespace CastOuts.ActionBar
 
     private void Start() {
       // Set the text on the button to the assigned hotkey.
-      _text.text = Enum.GetName(typeof(KeyCode), InputManager.Instance.GetHotkey(_settings.keyBinding));
+      _text.text = Enum.GetName(typeof(KeyCode), InputManager.Instance.GetHotkey(keyBinding));
 
       // Set the spell's thumbnail image on the button.
       if (!(_spell is null)) {
         _image.color = Color.white;
-        _image.sprite = _spell.Image;
+        _image.sprite = _spell.image;
       }
 
       // Add an event listener to mouse click on the button.
@@ -61,21 +45,21 @@ namespace CastOuts.ActionBar
     }
 
     private void Update() {
-      if (InputManager.Instance.GetKeyDown(_settings.keyBinding))
+      if (InputManager.Instance.GetKeyDown(keyBinding))
         HandleEvent();
     }
 
     /// <summary>
     /// Add a spell to the action bar button.
     /// </summary>
-    public void AddAction(ISpell spell) {
-      _spell = (SpellBase)spell;
+    public void AddAction(Spell spell) {
+      _spell = spell;
     }
 
     /// <summary>
     /// Add event handler to on button clicked.
     /// </summary>
-    public void AddEventHandler(UnityAction<ISpell> eventHandler) {
+    public void AddEventHandler(UnityAction<Spell> eventHandler) {
       _eventHandler += eventHandler;
     }
 

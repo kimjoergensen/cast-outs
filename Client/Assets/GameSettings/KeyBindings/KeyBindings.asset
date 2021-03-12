@@ -12,19 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63c023ca24f267c469556a2d65c5e6a7, type: 3}
   m_Name: KeyBindings
   m_EditorClassIdentifier: 
-  playerKeyBindings:
-    Move: 324
-    Fire: 323
-    Stop: 115
-  actionBarKeyBindings:
-    ActionBarButton1: 113
-    ActionBarButton2: 119
-    ActionBarButton3: 101
-    ActionBarButton4: 114
-    ActionBarButton5: 100
-    ActionBarButton6: 102
-  cameraKeyBindings:
-    CameraMoveRight: 275
-    CamereMoveLeft: 276
-    CameraMoveUp: 273
-    CameraMoveDown: 274
+  actionBarKeyBindings: {fileID: 11400000, guid: 7ebd2be2d8010b84887c89083fbca314,
+    type: 2}
+  cameraKeyBindings: {fileID: 11400000, guid: 50518fad2848a4344be147a779d9eb40, type: 2}
+  playerKeyBindings: {fileID: 11400000, guid: 9113477706fc58a4b90c82bcb91a41f2, type: 2}

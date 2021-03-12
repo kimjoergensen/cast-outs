@@ -3,8 +3,7 @@ namespace Assets.Scripts.VariableReferences
   using Assets.Scripts.VariableReferences.Bases;
   using Assets.Scripts.VariableReferences.Variables;
   using System;
-  using UnityEngine;
 
   [Serializable]
-  public class Vector3Reference : VariableReferenceBase<Vector3, Vector3Variable> { }
+  public class FloatReference : VariableReferenceBase<float, FloatVariable> { }
 }

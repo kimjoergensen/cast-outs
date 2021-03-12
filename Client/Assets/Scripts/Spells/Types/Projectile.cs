@@ -2,6 +2,7 @@ namespace Assets.Scripts.Spells.Types
 {
   using Assets.Scripts.Player;
   using Assets.Scripts.Spells.Bases;
+  using Assets.Scripts.VariableReferences;
   using UnityEngine;
 
   [RequireComponent(typeof(Rigidbody))]
@@ -11,7 +12,8 @@ namespace Assets.Scripts.Spells.Types
     [Tooltip("Set the speed of the projectile.")]
     public float speed;
 
-    private Transform _spawnLocation;
+    [Tooltip("Set the spell spawn location variable.")]
+    public TransformReference spawnLocation;
 
     /// <summary>
     /// Shoot the spell from the player's spawn location towards the target location.
@@ -23,10 +25,9 @@ namespace Assets.Scripts.Spells.Types
 
       var controller = player.GetComponent<PlayerController>();
       if (controller is null) return;
-      _spawnLocation = controller.spellSpawnLocation;
 
       // Instantiate the fireball at the spawn location, looking towards the target location.
-      var fireball = Instantiate(Spell, _spawnLocation.position, _spawnLocation.rotation);
+      var fireball = Instantiate(Spell, spawnLocation.Value.position, spawnLocation.Value.rotation);
       fireball.transform.LookAt(target);
 
       // Move the fireball in a straight line.

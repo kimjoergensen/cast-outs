@@ -1657,7 +1657,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57ec6c3a324e74c43b47e269d4c9b220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellSpawnLocation: {fileID: 1500333362}
+  spellSpawnLocation:
+    _useConstant: 0
+    _constant:
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 0}
+    _variable: {fileID: 0}
+  health:
+    _useConstant: 1
+    _constant: 0
+    _variable: {fileID: 11400000, guid: 6f8436c76eb5d7b4eaed11d44ad4b09c, type: 2}
 --- !u!136 &1184958537
 CapsuleCollider:
   m_ObjectHideFlags: 0

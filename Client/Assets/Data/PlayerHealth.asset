@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 290db35f425da9a428042be7250c06b2, type: 3}
-  m_Name: Projectile
-  m_EditorClassIdentifier: 
-  speed: 700
-  spawnLocation: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: bcd52e29716943d4287ad7f483214358, type: 3}
+  m_Name: PlayerHealth
+  m_EditorClassIdentifier: Assembly-CSharp:Assets.Scripts.VariableReferences:FloatVariable
+  _value: 100

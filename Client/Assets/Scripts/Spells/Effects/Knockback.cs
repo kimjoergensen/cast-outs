@@ -6,6 +6,7 @@ namespace Assets.Scripts.Spells.Effects
   [CreateAssetMenu(fileName = "Knockback", menuName = "Effects/Knockback")]
   public class Knockback : Effect
   {
+    [Tooltip("Set the knockback force on the hit object.")]
     public float force;
 
     /// <summary>
@@ -19,8 +20,8 @@ namespace Assets.Scripts.Spells.Effects
       var rigidbody = target.gameObject.GetComponent<Rigidbody>();
       if (rigidbody is null) return;
 
-      var direction = target.transform.position - spell.transform.position;
-      var _force = direction * force;
+      var direction = spell.transform.forward - (spell.transform.position - target.transform.position);
+      var _force = direction.normalized * force;
       rigidbody.AddForce(_force);
     }
   }

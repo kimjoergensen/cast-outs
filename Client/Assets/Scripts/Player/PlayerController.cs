@@ -4,6 +4,7 @@ namespace Assets.Scripts.Player
   using Assets.Scripts.Shared.KeyBinding;
   using Assets.Scripts.Shared.Utility;
   using Assets.Scripts.Spells.Bases;
+  using Assets.Scripts.VariableReferences;
   using System;
   using System.Collections;
   using UnityEngine;
@@ -11,8 +12,22 @@ namespace Assets.Scripts.Player
   [RequireComponent(typeof(PlayerMovement))]
   public class PlayerController : MonoBehaviour, IObserver<ActionBarButtonInfo>
   {
+    [Serializable]
+    private class SpellSpawnLocation
+    {
+      [Tooltip("Set a local transform reference.")]
+      public Transform localReference;
+
+      [Tooltip("Set a public variable reference for other scripts to reference.")]
+      public TransformReference publicReference;
+    }
+
+    [SerializeField]
     [Tooltip("Set the spawn location of all spells cast by the player.")]
-    public Transform spellSpawnLocation;
+    private SpellSpawnLocation spellSpawnLocation;
+
+    [Tooltip("Set the health of the player. Use a FloatVariable to let other objects interact with the value.")]
+    public FloatReference health;
 
     private PlayerMovement _playerMovement;
     private Spell _pendingSpell;
@@ -29,6 +44,9 @@ namespace Assets.Scripts.Player
     }
 
     private void Update() {
+      // Update spellSpawnLocation reference values.
+      UpdateSpellSpawn(spellSpawnLocation.localReference, spellSpawnLocation.publicReference.Value);
+
       // Check if the player has a pending spell to cast and is pressing the FIRE spell input.
       if (_pendingSpell != null
           && InputManager.Instance.GetKeyDown(KeyBinding.PlayerFire)
@@ -52,6 +70,12 @@ namespace Assets.Scripts.Player
 
       // Remove the spell from the pending spell slot.
       _pendingSpell = null;
+    }
+
+    private void UpdateSpellSpawn(Transform local, TransformOverride reference) {
+      reference.position = local.position;
+      reference.rotation = local.rotation;
+      spellSpawnLocation.publicReference.Value = reference;
     }
 
     private void Unsubscribe() {

@@ -67,13 +67,8 @@ namespace Assets.Scripts.ActionBar
       // Do nothing if no spell has been assigned to the action bar button.
       if (_spell is null) return;
 
-      // Make a temporary copy of the event to avoid possibility of
-      // a race condition if the last subscriber unsubscribes immediately after
-      // the null check and before the event is raised.
-      var handler = _eventHandler;
-
       // Invoke all subscribers on the delegate and pass the spell to their parameter.
-      handler?.Invoke(_spell);
+      _eventHandler?.Invoke(_spell);
     }
   }
 }

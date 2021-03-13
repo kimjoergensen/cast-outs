@@ -5,5 +5,5 @@ namespace Assets.Scripts.VariableReferences
   using System;
 
   [Serializable]
-  public class FloatReference : VariableReferenceBase<float, FloatVariable> { }
+  public class FloatReference : ReferenceBase<float, FloatVariable> { }
 }

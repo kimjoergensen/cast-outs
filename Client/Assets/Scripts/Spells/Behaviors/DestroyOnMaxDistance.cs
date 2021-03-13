@@ -4,9 +4,10 @@
   using System.Collections;
   using UnityEngine;
 
-  [CreateAssetMenu(fileName = "DestroyOnMaxDistance", menuName = "Behaviors/Destroy On Max Distance")]
+  [CreateAssetMenu(fileName = "DestroyOnMaxDistance", menuName = "Spells/Behaviors/Destroy On Max Distance")]
   public class DestroyOnMaxDistance : Behavior
   {
+    [Range(0, 50)]
     [Tooltip("Set the maximum range the spell can travel from it's spawn location before being destroyed.")]
     public float range;
 

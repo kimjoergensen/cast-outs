@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1563ba02bdb04e44fbb83e6ace208806, type: 3}
-  m_Name: PlayerSpellSpawnLocation
+  m_Script: {fileID: 11500000, guid: e479fe339abf7da48bcd6530e22f0b3c, type: 3}
+  m_Name: PlayerSpellSpawnRotation
   m_EditorClassIdentifier: 

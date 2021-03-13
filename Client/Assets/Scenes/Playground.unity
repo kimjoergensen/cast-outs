@@ -806,6 +806,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &443274057
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 443274058}
+  m_Layer: 9
+  m_Name: Spell Spawn Location
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &443274058
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 443274057}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1184958534}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &513829503
 GameObject:
   m_ObjectHideFlags: 0
@@ -1593,6 +1623,7 @@ GameObject:
   - component: {fileID: 1184958535}
   - component: {fileID: 1184958533}
   - component: {fileID: 1184958536}
+  - component: {fileID: 1184958539}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -1625,7 +1656,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 908640998}
-  - {fileID: 1500333362}
+  - {fileID: 443274058}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1657,16 +1688,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57ec6c3a324e74c43b47e269d4c9b220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellSpawnLocation:
-    _useConstant: 0
-    _constant:
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0, w: 0}
-    _variable: {fileID: 0}
   health:
-    _useConstant: 1
-    _constant: 0
-    _variable: {fileID: 11400000, guid: 6f8436c76eb5d7b4eaed11d44ad4b09c, type: 2}
+    _useLocal: 0
+    _local: 0
+    _referenced: {fileID: 11400000, guid: 6f8436c76eb5d7b4eaed11d44ad4b09c, type: 2}
 --- !u!136 &1184958537
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1703,6 +1728,28 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1184958539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184958532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 578817b31e4f8834fa38813f3bd91f6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellSpawnLocation:
+    localReference: {fileID: 443274058}
+    spawnLocationReference:
+      _useLocal: 0
+      _local: {x: 0, y: 0, z: 0}
+      _referenced: {fileID: 11400000, guid: a141ca4b1dcf08c4b87a1913737ee8ab, type: 2}
+    spawnRotationReference:
+      _useLocal: 0
+      _local: {x: 0, y: 0, z: 0, w: 0}
+      _referenced: {fileID: 11400000, guid: 04ff7360443d17543acff5f2321e79b5, type: 2}
 --- !u!1 &1230161809
 GameObject:
   m_ObjectHideFlags: 0
@@ -1961,36 +2008,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1481252413}
   m_CullTransparentMesh: 0
---- !u!1 &1500333361
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1500333362}
-  m_Layer: 9
-  m_Name: Spell Spawn Location
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1500333362
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1500333361}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0.8}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1184958534}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1537240515
 GameObject:
   m_ObjectHideFlags: 0

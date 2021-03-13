@@ -4867,6 +4867,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Fireball
   image: {fileID: 21300000, guid: 50bb1f0738ac6554db59e8131edd842b, type: 3}
+  cooldown:
+    _useLocal: 0
+    _local: 0
+    _referenced: {fileID: 11400000, guid: a928e16a2e605844686063daf74d9875, type: 2}
   type: {fileID: 11400000, guid: aed7b49f5c852604a8100ca085e88daf, type: 2}
   behaviors:
   - {fileID: 11400000, guid: d2149baeb01a41840910609d7c4fe742, type: 2}

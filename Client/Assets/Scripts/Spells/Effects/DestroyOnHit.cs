@@ -3,7 +3,7 @@ namespace Assets.Scripts.Spells.Effects
   using Assets.Scripts.Spells.Bases;
   using UnityEngine;
 
-  [CreateAssetMenu(fileName = "DestroyOnHit", menuName = "Effects/Destroy On Hit")]
+  [CreateAssetMenu(fileName = "DestroyOnHit", menuName = "Spells/Effects/Destroy On Hit")]
   public class DestroyOnHit : Effect
   {
     public override void Apply(GameObject spell, Collider target) {

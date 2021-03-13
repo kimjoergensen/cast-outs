@@ -6,5 +6,5 @@ namespace Assets.Scripts.VariableReferences
   using UnityEngine;
 
   [Serializable]
-  public class Vector3Reference : ReferenceBase<Vector3, Vector3Variable> { }
+  public class QuaternionReference : ReferenceBase<Quaternion, QuaternionVariable> { }
 }

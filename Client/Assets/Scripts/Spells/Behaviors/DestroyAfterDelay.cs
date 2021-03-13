@@ -4,7 +4,7 @@ namespace Assets.Scripts.Spells.Behaviors
   using System.Collections;
   using UnityEngine;
 
-  [CreateAssetMenu(fileName = "DestroyAfterDelay", menuName = "Behaviors/Destroy After Delay")]
+  [CreateAssetMenu(fileName = "DestroyAfterDelay", menuName = "Spells/Behaviors/Destroy After Delay")]
   public class DestroyAfterDelay : Behavior
   {
     [Tooltip("Set the time delayed in seconds before destroying the spell.")]

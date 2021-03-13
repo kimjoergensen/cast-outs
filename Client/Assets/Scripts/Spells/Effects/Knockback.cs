@@ -3,7 +3,7 @@ namespace Assets.Scripts.Spells.Effects
   using Assets.Scripts.Spells.Bases;
   using UnityEngine;
 
-  [CreateAssetMenu(fileName = "Knockback", menuName = "Effects/Knockback")]
+  [CreateAssetMenu(fileName = "Knockback", menuName = "Spells/Effects/Knockback")]
   public class Knockback : Effect
   {
     [Tooltip("Set the knockback force on the hit object.")]
